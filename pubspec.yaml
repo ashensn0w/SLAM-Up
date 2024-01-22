@@ -64,32 +64,38 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-# Navigation Bar Buttons
-    - lib\assets\images\NavigationBarButtons\dashboard_selected.png
-    - lib\assets\images\NavigationBarButtons\dashboard_unselected.png
-    - lib\assets\images\NavigationBarButtons\financial_contents_selected.png
-    - lib\assets\images\NavigationBarButtons\financial_contents_unselected.png
-    - lib\assets\images\NavigationBarButtons\profile_selected.png
-    - lib\assets\images\NavigationBarButtons\profile_unselected.png
-    - lib\assets\images\NavigationBarButtons\summary_selected.png
-    - lib\assets\images\NavigationBarButtons\summary_unselected.png
-# Transaction Icons
-    - lib\assets\images\TransactionIcons\clothing_icon.png
-    - lib\assets\images\TransactionIcons\debt_payment_icon.png
-    - lib\assets\images\TransactionIcons\education_icon.png
-    - lib\assets\images\TransactionIcons\entertainment_icon.png
-    - lib\assets\images\TransactionIcons\food_icon.png
-    - lib\assets\images\TransactionIcons\gift_icon.png
-    - lib\assets\images\TransactionIcons\health_icon.png
-    - lib\assets\images\TransactionIcons\housing_icon.png
-    - lib\assets\images\TransactionIcons\insurance_icon.png
-    - lib\assets\images\TransactionIcons\miscellaneous_icon.png
-    - lib\assets\images\TransactionIcons\savings_icon.png
-    - lib\assets\images\TransactionIcons\transportation_icon.png
-    - lib\assets\images\TransactionIcons\utilities_icon.png
-    - lib\assets\images\TransactionIcons\vacation_icon.png
-# Notification Button
-    - lib\assets\images\notification_button.png
+  # Global Icons
+    - lib/assets/images/GlobalIcons/dark_back_button.png
+    - lib/assets/images/GlobalIcons/light_back_button.png
+  # Navigation Bar Buttons
+    - lib/assets/images/NavigationBarButtons/dashboard_selected.png
+    - lib/assets/images/NavigationBarButtons/dashboard_unselected.png
+    - lib/assets/images/NavigationBarButtons/financial_contents_selected.png
+    - lib/assets/images/NavigationBarButtons/financial_contents_unselected.png
+    - lib/assets/images/NavigationBarButtons/profile_selected.png
+    - lib/assets/images/NavigationBarButtons/profile_unselected.png
+    - lib/assets/images/NavigationBarButtons/summary_selected.png
+    - lib/assets/images/NavigationBarButtons/summary_unselected.png
+  # Notification Button
+    - lib/assets/images/NotificationButtonsAndIcons/no_notif_icon.png
+    - lib/assets/images/NotificationButtonsAndIcons/notification_button.png
+    - lib/assets/images/NotificationButtonsAndIcons/read_icon.png
+    - lib/assets/images/NotificationButtonsAndIcons/unread_icon.png
+  # Transaction Icons
+    - lib/assets/images/TransactionIcons/clothing_icon.png
+    - lib/assets/images/TransactionIcons/debt_payment_icon.png
+    - lib/assets/images/TransactionIcons/education_icon.png
+    - lib/assets/images/TransactionIcons/entertainment_icon.png
+    - lib/assets/images/TransactionIcons/food_icon.png
+    - lib/assets/images/TransactionIcons/gift_icon.png
+    - lib/assets/images/TransactionIcons/health_icon.png
+    - lib/assets/images/TransactionIcons/housing_icon.png
+    - lib/assets/images/TransactionIcons/insurance_icon.png
+    - lib/assets/images/TransactionIcons/miscellaneous_icon.png
+    - lib/assets/images/TransactionIcons/savings_icon.png
+    - lib/assets/images/TransactionIcons/transportation_icon.png
+    - lib/assets/images/TransactionIcons/utilities_icon.png
+    - lib/assets/images/TransactionIcons/vacation_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -117,13 +123,13 @@ flutter:
   fonts:
   - family: Poppins
     fonts:
-      - asset: lib\assets\fonts\Poppins-Bold.ttf
+      - asset: lib/assets/fonts/Poppins-Bold.ttf
         weight: 700
-      - asset: lib\assets\fonts\Poppins-SemiBold.ttf
+      - asset: lib/assets/fonts/Poppins-SemiBold.ttf
         weight: 600
-      - asset: lib\assets\fonts\Poppins-Medium.ttf
+      - asset: lib/assets/fonts/Poppins-Medium.ttf
         weight: 500
-      - asset: lib\assets\fonts\Poppins-Regular.ttf
+      - asset: lib/assets/fonts/Poppins-Regular.ttf
         weight: 400
 
   #
