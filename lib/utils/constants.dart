@@ -102,3 +102,39 @@ const String vacationIcon = "lib/assets/images/TransactionIcons/vacation_icon.pn
     sections "PERSONAL INFORMATION - CONTACT INFO": Poppins Semi Bold
     text under the section: "Name - Email - Birthdate - Sex": Poppins Medium
 */
+
+/*
+Text(
+  'Title',
+  style: TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 16.0,
+    fontWeight: FontWeight.w500,
+    color: darkText,
+  ),
+),
+TextField(
+  style: TextStyle(
+    fontFamily: 'Poppins',
+    color: darkText,
+  ),
+  decoration: InputDecoration(
+    hintText: 'Enter title',
+    hintStyle: TextStyle(
+      fontFamily: 'Poppins',
+    ),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(
+          10.0),
+      borderSide:
+          BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10.0),
+      borderSide:
+          BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+    ),
+  ),
+  cursorColor: Color(0xFF2F2C2C),
+),
+*/
