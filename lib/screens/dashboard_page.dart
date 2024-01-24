@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 import 'notification_page.dart';
+import 'package:file_picker/file_picker.dart';
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -152,6 +153,24 @@ class AddExpensesPage extends StatelessWidget {
 }
 
 class AddMoneyPage extends StatelessWidget {
+  // Function to handle file attachment logic
+  void attachFile() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+      if (result != null) {
+        // Handle the picked file
+        print(result.files.single.name);
+        // You can use result.files.single.path to get the file path
+      } else {
+        // User canceled the file picking
+        print('File picking canceled.');
+      }
+    } catch (e) {
+      print('Error picking file: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -245,43 +264,136 @@ class AddMoneyPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                'Title:',
+                'Title',
                 style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w500,
+                  color: darkText,
                 ),
               ),
               TextField(
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  color: darkText,
+                  // Add other style properties as needed
+                ),
                 decoration: InputDecoration(
                   hintText: 'Enter title',
+                  hintStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    // Add other hint style properties as needed
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                        10.0), // Adjust the radius as needed
+                    borderSide:
+                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide:
+                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                  ),
                 ),
+                cursorColor: Color(0xFF2F2C2C),
               ),
               SizedBox(height: 20),
               Text(
-                'Spending Limit:',
+                'Spending Limit',
                 style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w500,
+                  color: darkText,
                 ),
               ),
               TextField(
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  color: darkText,
+                  // Add other style properties as needed
+                ),
                 decoration: InputDecoration(
                   hintText: 'Enter spending limit',
+                  hintStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    // Add other hint style properties as needed
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                        10.0), // Adjust the radius as needed
+                    borderSide:
+                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide:
+                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                  ),
                 ),
+                cursorColor: Color(0xFF2F2C2C),
               ),
               SizedBox(height: 20),
               Text(
-                'Description:',
+                'Description',
                 style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w500,
+                  color: darkText,
                 ),
               ),
               TextField(
-                maxLines:
-                    null, // or specify the maximum number of lines you want
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  color: darkText,
+                  // Add other style properties as needed
+                ),
                 decoration: InputDecoration(
                   hintText: 'Enter description',
+                  hintStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    // Add other hint style properties as needed
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                        10.0), // Adjust the radius as needed
+                    borderSide:
+                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide:
+                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                  ),
+                ),
+                cursorColor: Color(0xFF2F2C2C),
+                maxLines: null,
+              ),
+              SizedBox(height: 20),
+              Center(
+                child: ElevatedButton(
+                  onPressed: attachFile,
+                  child: Text(
+                    'Attach a File',
+                    style: TextStyle(
+                      color: darkText,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFFD5D0CA),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(13.0),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width / 3,
+                      vertical: 25.0,
+                    ),
+                  ),
                 ),
               ),
             ],
