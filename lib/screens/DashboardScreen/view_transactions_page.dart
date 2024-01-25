@@ -42,6 +42,7 @@ class MyCalendar extends StatefulWidget {
 
 class _MyCalendarState extends State<MyCalendar> {
   DateTime today = DateTime.now();
+
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
       today = day;
@@ -53,11 +54,41 @@ class _MyCalendarState extends State<MyCalendar> {
     return Column(
       children: [
         Container(
+          margin: EdgeInsets.symmetric(
+              horizontal: 16.0), // Adjust the margin as needed
           child: TableCalendar(
             locale: 'en_US',
             headerStyle: HeaderStyle(
               formatButtonVisible: false,
               titleCentered: true,
+              titleTextStyle: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+                color: darkText,
+              ),
+            ),
+            daysOfWeekStyle: DaysOfWeekStyle(
+              weekdayStyle: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                fontSize: 15.0,
+                color: darkText,
+              ),
+              weekendStyle: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                fontSize: 15.0,
+                color: darkText,
+              ),
+            ),
+            calendarStyle: CalendarStyle(
+              defaultTextStyle: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.normal,
+                fontSize: 15.0,
+                color: darkText,
+              ),
             ),
             availableGestures: AvailableGestures.all,
             selectedDayPredicate: (day) => isSameDay(day, today),
