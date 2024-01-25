@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
-
-class Category {
-  final String name;
-  final int value;
-
-  Category({required this.name, required this.value});
-}
+import 'package:pie_chart/pie_chart.dart';
+import '../utils/constants.dart';
+import 'notification_page.dart';
 
 class SummaryPage extends StatelessWidget {
-  List<Category> categories = [
-    Category(name: 'Bills', value: 10000),
-    Category(name: 'Leisure', value: 5000),
-    Category(name: 'Transportation', value: 5000),
-    Category(name: 'Food', value: 5000),
-  ];
+  Map<String, double> dataMap = {
+    "Transportation": 5000,
+    "Food": 3500,
+    "Bills": 7000,
+    // Add more data if needed
+  };
 
   @override
   Widget build(BuildContext context) {
+    double totalExpenses = dataMap.values.reduce((value, element) => value + element);
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: primLightBg,
       appBar: AppBar(
         title: Text(
           'Summary',
           style: TextStyle(
-            color: Colors.black,
+            color: darkText,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.bold,
             fontSize: 26.0,
@@ -34,77 +31,152 @@ class SummaryPage extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: Image.asset(
+              notifButton,
+            ),
             onPressed: () {
-              // Handle notification button press
-              // You can navigate to the notification page or show a notification
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NotificationsPage()),
+              );
             },
           ),
         ],
       ),
       body: Stack(
         children: [
-          Positioned(
-            left: 40.0,
-            top: 5.0,
-            child: Expenses(),
-          ),
-          Positioned(
-            left: 0,
-            top: 280.0,
-            child: Container(
-              padding: EdgeInsets.only(
-                top: 10.0,
-                left: 30.0,
+          Column(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Expenses(),
+                      SizedBox(height: 40),
+                      Text(
+                        'Total Expenses: ${totalExpenses.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          color: Colors.black,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              width: MediaQuery.of(context).size.width,
-              height: 50,
-              color: Color.fromRGBO(87, 111, 115, 1.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Categories:',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
+              Container(
+                height: MediaQuery.of(context).size.width / 1.2,
+                child: Center(
+                  child: Stack(
+                    alignment: Alignment.centerRight,
+                    children: [
+                      PieChart(
+                        dataMap: dataMap,
+                        animationDuration: Duration(milliseconds: 800),
+                        chartLegendSpacing: 16,
+                        chartRadius: MediaQuery.of(context).size.width / 2.0,
+                        colorList: [
+                          Colors.blue,
+                          Colors.green,
+                          Colors.red,
+                        ],
+                        initialAngleInDegree: 0,
+                        chartType: ChartType.ring,
+                        ringStrokeWidth: 80,
+                        centerText: "Expenses",
+                        legendOptions: LegendOptions(
+                          showLegendsInRow: false,
+                          legendPosition: LegendPosition.right,
+                          showLegends: false,
+                          legendShape: BoxShape.circle,
+                          legendTextStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        chartValuesOptions: ChartValuesOptions(
+                          showChartValueBackground: true,
+                          showChartValues: true,
+                          showChartValuesInPercentage: true,
+                          showChartValuesOutside: true,
+                          decimalPlaces: 1,
+                          chartValueBackgroundColor: Colors.transparent,
+                          chartValueStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16.5,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        right: 16,
+                        child: IconButton(
+                          icon: Icon(Icons.arrow_forward),
+                          onPressed: () {
+                            // Navigate to other screens
+                            // Use Navigator.push or Navigator.pushReplacement based on your requirement
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    margin: EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: dataMap.entries.map((entry) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 16,
+                                height: 16,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: getColorForCategory(entry.key),
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                '${entry.key}: ${entry.value}',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.black,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-          Positioned(
-            top: 330.0,
-            child: Container(
-              padding: EdgeInsets.only(
-                top: 5.0,
-                left: 35.0,
-              ),
-              width: MediaQuery.of(context).size.width,
-              // Increase the height to a value that accommodates all categories
-              height: 300.0, // Adjust height as needed
-              color: Color.fromRGBO(87, 111, 115, 1.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: categories.map((category) {
-                  return Text(
-                    '${category.name}: ${category.value}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Poppins',
-                      fontSize: 16.0,
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
+            ],
           ),
         ],
       ),
     );
+  }
+
+  Color getColorForCategory(String category) {
+    switch (category) {
+      case "Transportation":
+        return Colors.blue;
+      case "Food":
+        return Colors.green;
+      case "Bills":
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
   }
 }
 
