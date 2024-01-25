@@ -69,7 +69,7 @@ flutter:
   # Global Icons
     - lib/assets/images/GlobalIcons/dark_back_button.png
     - lib/assets/images/GlobalIcons/light_back_button.png
-    - lib/assets/images/GlobalIcons/hide.png
+    - lib/assets/images/GlobalIcons/hide_password_button.png
   # Navigation Bar Buttons
     - lib/assets/images/NavigationBarButtons/dashboard_selected.png
     - lib/assets/images/NavigationBarButtons/dashboard_unselected.png
