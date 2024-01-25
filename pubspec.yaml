@@ -67,6 +67,7 @@ flutter:
 
   assets:
   # Global Icons
+    - lib/assets/images/GlobalIcons/slamup_logo.png
     - lib/assets/images/GlobalIcons/dark_back_button.png
     - lib/assets/images/GlobalIcons/light_back_button.png
     - lib/assets/images/GlobalIcons/hide_password_button.png
