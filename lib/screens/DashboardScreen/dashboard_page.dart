@@ -48,40 +48,12 @@ class DashboardPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20.0),
-              TransactionsContainer(),
+              TransactionsWidget(),
+              SizedBox(height: 10.0),
+              TransactionListWidget(), // Add spacing between existing TransactionsContainer and new transactions list
             ],
           ),
-          Positioned(
-            bottom: 70.0,
-            right: 20.0,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddExpensesPage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                primary: seconDarkBg,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(13.0),
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 15.0,
-                  vertical: 20.0,
-                ),
-              ),
-              child: Text(
-                '+ Add Expenses',
-                style: TextStyle(
-                  color: lightText,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
+          AddMoneyButton(),
         ],
       ),
     );
@@ -161,7 +133,43 @@ class MoneyCardWidget extends StatelessWidget {
   }
 }
 
-class TransactionsContainer extends StatelessWidget {
+class AddMoneyButton extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 70.0,
+      right: 20.0,
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddExpensesPage()),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          primary: seconDarkBg,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(13.0),
+          ),
+          padding: EdgeInsets.symmetric(
+            horizontal: 15.0,
+            vertical: 20.0,
+          ),
+        ),
+        child: Text(
+          '+ Add Expenses',
+          style: TextStyle(
+            color: lightText,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TransactionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -209,6 +217,109 @@ class TransactionsContainer extends StatelessWidget {
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
               fontSize: 18,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TransactionListWidget extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView(
+        children: [
+          TransactionListItem(
+            title: 'Movie',
+            description:
+                'rororrororrororrororrororrororrororrororrororrororrororrororrororroror',
+            amount: -700,
+            icon: entertainmentIcon,
+          ),
+          TransactionListItem(
+            title: 'Racket',
+            description: 'For sports',
+            amount: -1500,
+            icon: healthIcon,
+          ),
+          TransactionListItem(
+            title: 'Food',
+            description: 'Groceries',
+            amount: -2000,
+            icon: foodIcon,
+          ),
+          // Add more TransactionListItem widgets as needed
+        ],
+      ),
+    );
+  }
+}
+
+class TransactionListItem extends StatelessWidget {
+  final String title;
+  final String description;
+  final double amount;
+  final String icon;
+
+  const TransactionListItem({
+    Key? key,
+    required this.title,
+    required this.description,
+    required this.amount,
+    required this.icon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10.0),
+      margin: EdgeInsets.symmetric(horizontal: 50.0, vertical: 8.0),
+      decoration: BoxDecoration(
+        color: Color(0xFFD5D0CA),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Image.asset(
+                icon,
+                width: 35.0,
+                height: 35.0,
+                // You may need to adjust the image asset path based on your project structure
+              ),
+              SizedBox(width: 8.0), // Add some spacing between icon and text
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '$title',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Text(
+            'Money Deducted: $amount',
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w400,
+              fontSize: 16.0,
+            ),
+          ),
+          Text(
+            'Description: $description',
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w400,
+              fontSize: 16.0,
             ),
           ),
         ],
