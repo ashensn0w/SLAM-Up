@@ -39,6 +39,7 @@ const updateButton = Color(0xFF008B16);
 
 /* -- LIST OF ALL IMAGE ASSETS -- */
 // global icons
+const String darkBackButton = "lib/assets/images/GlobalIcons/hide_password_button.png";
 const String darkBackButton = "lib/assets/images/GlobalIcons/dark_back_button.png";
 const String lightBackButton = "lib/assets/images/GlobalIcons/light_back_button.png";
 
