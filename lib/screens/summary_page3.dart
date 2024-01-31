@@ -24,6 +24,8 @@ class _SummaryPage3State extends State<SummaryPage3> {
   ];
 
   List<AllocationEntry> entries = [];
+  double budgetAmount = 0.0;
+  List<String> calculatedAmounts = [];
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,29 @@ class _SummaryPage3State extends State<SummaryPage3> {
             child: BudgetAllocation(),
           ),
           SizedBox(height: 20),
+          Container(
+            width: 270,
+            height: 30,
+            child: ElevatedButton(
+              onPressed: () => _showBudgetInputDialog(context),
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromRGBO(213, 208, 202, 1.0),
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+              ),
+              child: Text(
+                'Input Budget',
+                style: TextStyle(
+                  color: Color.fromRGBO(47, 44, 44, 1.0),
+                  fontFamily: 'Poppins',
+                  fontSize: 17.0,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
           EditAllocationButton(
             entries: entries,
             onUpdate: (List<AllocationEntry> updatedEntries) {
@@ -72,15 +97,15 @@ class _SummaryPage3State extends State<SummaryPage3> {
               });
             },
           ),
-          SizedBox(height: 80),
+          SizedBox(height: 40),
           PieChart(
             dataMap: data,
-            chartRadius: MediaQuery.of(context).size.width / 1.9,
+            chartRadius: MediaQuery.of(context).size.width / 2.0,
             chartType: ChartType.ring,
-            ringStrokeWidth: 60,
+            ringStrokeWidth: 50,
             centerText: 'Allocated\nBudget',
             legendOptions: LegendOptions(
-              showLegendsInRow: false,
+              showLegendsInRow: true,
               legendPosition: LegendPosition.bottom,
               showLegends: true,
               legendShape: BoxShape.circle,
@@ -102,6 +127,37 @@ class _SummaryPage3State extends State<SummaryPage3> {
               ),
             ),
           ),
+          if (calculatedAmounts.isNotEmpty)
+            Column(
+              children: [
+                SizedBox(height: 20),
+                Text(
+                  'Calculated Amounts:',
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height:20.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 50.0),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: calculatedAmounts.length,
+                    itemBuilder: (context, index) {
+                      return Text(
+                        calculatedAmounts[index],
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 16,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
         ],
       ),
     );
@@ -121,6 +177,56 @@ class _SummaryPage3State extends State<SummaryPage3> {
     }
 
     return data;
+  }
+
+  void _showBudgetInputDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Enter Budget Amount'),
+          content: TextField(
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              setState(() {
+                budgetAmount = double.tryParse(value) ?? 0.0;
+              });
+            },
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _calculateAllocatedBudget();
+              },
+              child: Text('Submit'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _calculateAllocatedBudget() {
+    calculatedAmounts.clear();
+
+    Map<String, double> calculatedData = {};
+    for (var entry in entries.isNotEmpty ? entries : sampleData) {
+      double allocatedAmount = (budgetAmount * entry.percentage) / 100;
+      calculatedData[entry.category] = allocatedAmount;
+
+      calculatedAmounts.add('${entry.category}: ${allocatedAmount.toStringAsFixed(2)}');
+    }
+
+    setState(() {
+      // Update the UI when calculated amounts are available
+    });
   }
 }
 
@@ -160,7 +266,7 @@ class EditAllocationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
+      width: 270,
       height: 30,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
