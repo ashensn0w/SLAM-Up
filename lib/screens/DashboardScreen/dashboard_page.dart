@@ -99,9 +99,10 @@ class MoneyCardWidget extends StatelessWidget {
                 Text(
                   '₱ $amount',
                   style: TextStyle(
-                    fontFamily: 'Poppins',
+                    fontFamily: 'Roboto',
                     fontSize: 28.0,
                     fontWeight: FontWeight.bold,
+                    color: darkText,
                   ),
                 ),
                 Padding(
