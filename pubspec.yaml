@@ -104,6 +104,9 @@ flutter:
     - lib/assets/images/TransactionIcons/transportation_icon.png
     - lib/assets/images/TransactionIcons/utilities_icon.png
     - lib/assets/images/TransactionIcons/vacation_icon.png
+    # Financial Contents Icons and Buttons
+    - lib/assets/images/FinancialContentsIconsAndButtons/fc_left_button.png
+    - lib/assets/images/FinancialContentsIconsAndButtons/fc_right_button.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
