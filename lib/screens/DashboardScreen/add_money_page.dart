@@ -54,7 +54,7 @@ class AddMoneyPage extends StatelessWidget {
                         '₱', // Philippine Peso symbol
                         style: TextStyle(
                           fontSize: 28.0,
-                          fontFamily: 'Poppins',
+                          fontFamily: 'Roboto',
                           fontWeight: FontWeight.bold,
                           color: darkText,
                         ),
