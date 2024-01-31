@@ -100,7 +100,7 @@ class MoneyCardWidget extends StatelessWidget {
                   '₱ $amount',
                   style: TextStyle(
                     fontFamily: 'Roboto',
-                    fontSize: 28.0,
+                    fontSize: 30.0,
                     fontWeight: FontWeight.bold,
                     color: darkText,
                   ),
@@ -115,7 +115,7 @@ class MoneyCardWidget extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color(0xFF39524F),
+                      primary: seconDarkBg,
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(20.0),
                     ),
