@@ -76,6 +76,10 @@ const String transportationIcon = "lib/assets/images/TransactionIcons/transporta
 const String utilitiesIcon = "lib/assets/images/TransactionIcons/utilities_icon.png";
 const String vacationIcon = "lib/assets/images/TransactionIcons/vacation_icon.png";
 
+// financial contents buttons and icons
+const String leftButton = "lib/assets/images/FinancialContentsIconsAndButtons/fc_left_button.png";
+const String rightButton = "lib/assets/images/FinancialContentsIconsAndButtons/fc_right_button.png";
+
 /* 
   // GLOBAL
     appbar title and others not mentioned: Poppins Bold
