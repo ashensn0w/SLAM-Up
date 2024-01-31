@@ -28,13 +28,18 @@ class ViewTransactionsPage extends StatelessWidget {
           ),
         ),
       ),
-      body: MyCalendar(),
+      body: Column(
+        children: [
+          MyCalendar(),
+          TransactionList(), // Wrap TransactionList in a Column directly
+        ],
+      ),
     );
   }
 }
 
 class MyCalendar extends StatefulWidget {
-  const MyCalendar({super.key});
+  const MyCalendar({Key? key}) : super(key: key);
 
   @override
   State<MyCalendar> createState() => _MyCalendarState();
@@ -54,8 +59,7 @@ class _MyCalendarState extends State<MyCalendar> {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.symmetric(
-              horizontal: 16.0), // Adjust the margin as needed
+          margin: EdgeInsets.symmetric(horizontal: 16.0),
           child: TableCalendar(
             locale: 'en_US',
             headerStyle: HeaderStyle(
@@ -89,6 +93,26 @@ class _MyCalendarState extends State<MyCalendar> {
                 fontSize: 15.0,
                 color: darkText,
               ),
+              selectedTextStyle: TextStyle(
+                color: Color(0xFF39524F), // Set your desired color
+                fontWeight: FontWeight.bold,
+              ),
+              selectedDecoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.transparent,
+                border: Border.all(
+                  color: Color(0xFF39524F),
+                  width: 2.0,
+                ),
+              ),
+              todayTextStyle: TextStyle(
+                color: Colors.white, // Set your desired color
+                fontWeight: FontWeight.bold,
+              ),
+              todayDecoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFF39524F),
+              ),
             ),
             availableGestures: AvailableGestures.all,
             selectedDayPredicate: (day) => isSameDay(day, today),
@@ -99,6 +123,38 @@ class _MyCalendarState extends State<MyCalendar> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class TransactionList extends StatefulWidget {
+  @override
+  _TransactionListState createState() => _TransactionListState();
+}
+
+class _TransactionListState extends State<TransactionList> {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          color: seconDarkBg,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40.0),
+            topRight: Radius.circular(40.0),
+          ),
+        ),
+        child: Center(
+          child: Text(
+            'Your Container Content',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
