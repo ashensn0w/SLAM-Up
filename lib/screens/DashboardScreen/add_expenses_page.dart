@@ -3,12 +3,14 @@ import 'package:slam_up/utils/constants.dart';
 import 'dashboard_page.dart';
 
 class AddExpensesPage extends StatelessWidget {
+  const AddExpensesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primLightBg, // Use your desired background color
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Add Expenses',
           style: TextStyle(
             color: darkText, // Use your desired text color
@@ -34,8 +36,8 @@ class AddExpensesPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 10), // Adjust the spacing as needed
-              Column(
+              const SizedBox(height: 10), // Adjust the spacing as needed
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -94,8 +96,8 @@ class AddExpensesPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Tag',
                 style: TextStyle(
                   fontFamily: 'Poppins',
@@ -104,9 +106,9 @@ class AddExpensesPage extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              MyDropdown(),
-              SizedBox(height: 20),
-              Text(
+              const MyDropdown(),
+              const SizedBox(height: 20),
+              const Text(
                 'Title',
                 style: TextStyle(
                   fontFamily: 'Poppins',
@@ -116,14 +118,14 @@ class AddExpensesPage extends StatelessWidget {
                 ),
               ),
               TextField(
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Poppins',
                   color: darkText,
                   // Add other style properties as needed
                 ),
                 decoration: InputDecoration(
                   hintText: 'Enter title',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     fontFamily: 'Poppins',
                     // Add other hint style properties as needed
                   ),
@@ -131,18 +133,18 @@ class AddExpensesPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                         10.0), // Adjust the radius as needed
                     borderSide:
-                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                        const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide:
-                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                        const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
                   ),
                 ),
-                cursorColor: Color(0xFF2F2C2C),
+                cursorColor: const Color(0xFF2F2C2C),
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Description',
                 style: TextStyle(
                   fontFamily: 'Poppins',
@@ -152,14 +154,14 @@ class AddExpensesPage extends StatelessWidget {
                 ),
               ),
               TextField(
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Poppins',
                   color: darkText,
                   // Add other style properties as needed
                 ),
                 decoration: InputDecoration(
                   hintText: 'Enter description',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     fontFamily: 'Poppins',
                     // Add other hint style properties as needed
                   ),
@@ -167,38 +169,38 @@ class AddExpensesPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                         10.0), // Adjust the radius as needed
                     borderSide:
-                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                        const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide:
-                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                        const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
                   ),
                 ),
-                cursorColor: Color(0xFF2F2C2C),
+                cursorColor: const Color(0xFF2F2C2C),
                 maxLines: null,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Align(
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DashboardPage()),
+                      MaterialPageRoute(builder: (context) => const DashboardPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: seconDarkBg,
+                    backgroundColor: seconDarkBg,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(13.0),
                     ),
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 15.0,
                       vertical: 20.0,
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Save',
                     style: TextStyle(
                       color: lightText,
@@ -242,8 +244,11 @@ class AddExpensesPage extends StatelessWidget {
 }
 
 class MyDropdown extends StatefulWidget {
+  const MyDropdown({super.key});
+
   @override
-  _MyDropdownState createState() => _MyDropdownState();
+  State<MyDropdown> createState() => _MyDropdownState();
+  //_MyDropdownState createState() => _MyDropdownState();
 }
 
 class _MyDropdownState extends State<MyDropdown> {
@@ -252,10 +257,10 @@ class _MyDropdownState extends State<MyDropdown> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        border: Border.all(color: Color(0xFFA9A9A9), width: 2.0),
+        border: Border.all(color: const Color(0xFFA9A9A9), width: 2.0),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
@@ -279,7 +284,7 @@ class _MyDropdownState extends State<MyDropdown> {
               value: value,
               child: Text(
                 value,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Poppins',
                   color: Colors.black, // Set your desired text color
                 ),
@@ -297,7 +302,7 @@ class _MyDropdownState extends State<MyDropdown> {
             style: TextStyle(
               fontFamily: 'Poppins',
               color:
-                  selectedCategory != null ? Colors.black : Color(0xFFA9A9A9),
+                  selectedCategory != null ? Colors.black : const Color(0xFFA9A9A9),
             ),
           ),
           value: selectedCategory,
