@@ -3,12 +3,14 @@ import 'package:slam_up/utils/constants.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ViewTransactionsPage extends StatelessWidget {
+  const ViewTransactionsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primLightBg,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'View All',
           style: TextStyle(
             color: darkText,
@@ -28,9 +30,10 @@ class ViewTransactionsPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
+      body: const Column(
         children: [
           MyCalendar(),
+          SizedBox(height: 15.0),
           TransactionList(), // Wrap TransactionList in a Column directly
         ],
       ),
@@ -59,10 +62,10 @@ class _MyCalendarState extends State<MyCalendar> {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.0),
+          margin: const EdgeInsets.symmetric(horizontal: 16.0),
           child: TableCalendar(
             locale: 'en_US',
-            headerStyle: HeaderStyle(
+            headerStyle: const HeaderStyle(
               formatButtonVisible: false,
               titleCentered: true,
               titleTextStyle: TextStyle(
@@ -72,7 +75,7 @@ class _MyCalendarState extends State<MyCalendar> {
                 color: darkText,
               ),
             ),
-            daysOfWeekStyle: DaysOfWeekStyle(
+            daysOfWeekStyle: const DaysOfWeekStyle(
               weekdayStyle: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
@@ -87,13 +90,13 @@ class _MyCalendarState extends State<MyCalendar> {
               ),
             ),
             calendarStyle: CalendarStyle(
-              defaultTextStyle: TextStyle(
+              defaultTextStyle: const TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.normal,
                 fontSize: 15.0,
                 color: darkText,
               ),
-              selectedTextStyle: TextStyle(
+              selectedTextStyle: const TextStyle(
                 color: Color(0xFF39524F), // Set your desired color
                 fontWeight: FontWeight.bold,
               ),
@@ -101,15 +104,15 @@ class _MyCalendarState extends State<MyCalendar> {
                 shape: BoxShape.circle,
                 color: Colors.transparent,
                 border: Border.all(
-                  color: Color(0xFF39524F),
+                  color: const Color(0xFF39524F),
                   width: 2.0,
                 ),
               ),
-              todayTextStyle: TextStyle(
+              todayTextStyle: const TextStyle(
                 color: Colors.white, // Set your desired color
                 fontWeight: FontWeight.bold,
               ),
-              todayDecoration: BoxDecoration(
+              todayDecoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color(0xFF39524F),
               ),
@@ -128,8 +131,11 @@ class _MyCalendarState extends State<MyCalendar> {
 }
 
 class TransactionList extends StatefulWidget {
+  const TransactionList({super.key});
+
   @override
-  _TransactionListState createState() => _TransactionListState();
+  State<TransactionList> createState() => _TransactionListState();
+
 }
 
 class _TransactionListState extends State<TransactionList> {
@@ -137,14 +143,14 @@ class _TransactionListState extends State<TransactionList> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: seconDarkBg,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(40.0),
             topRight: Radius.circular(40.0),
           ),
         ),
-        child: Center(
+        child: const Center(
           child: Text(
             'Your Container Content',
             style: TextStyle(
