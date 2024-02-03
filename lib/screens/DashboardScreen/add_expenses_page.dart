@@ -211,30 +211,6 @@ class AddExpensesPage extends StatelessWidget {
                   ),
                 ),
               ),
-              /*Center(
-                child: ElevatedButton(
-                  onPressed: attachFile,
-                  child: Text(
-                    'Attach a File',
-                    style: TextStyle(
-                      color: darkText,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xFFD5D0CA),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(13.0),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width / 3,
-                      vertical: 25.0,
-                    ),
-                  ),
-                ),
-              ),*/
             ],
           ),
         ),
