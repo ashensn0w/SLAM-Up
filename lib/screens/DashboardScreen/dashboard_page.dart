@@ -6,12 +6,14 @@ import '../DashboardScreen/view_transactions_page.dart';
 import '../notification_page.dart';
 
 class DashboardPage extends StatelessWidget {
+  const DashboardPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primLightBg,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Dashboard',
           style: TextStyle(
             color: darkText,
@@ -41,19 +43,19 @@ class DashboardPage extends StatelessWidget {
         children: [
           Column(
             children: [
-              Container(
+              SizedBox(
                 height: MediaQuery.of(context).size.height / 4,
-                child: Center(
+                child: const Center(
                   child: MoneyCardWidget(amount: 69000.0),
                 ),
               ),
-              SizedBox(height: 20.0),
-              TransactionsWidget(),
-              SizedBox(height: 10.0),
-              TransactionListWidget(), // Add spacing between existing TransactionsContainer and new transactions list
+              const SizedBox(height: 20.0),
+              const TransactionsWidget(),
+              const SizedBox(height: 10.0),
+              const TransactionListWidget(), // Add spacing between existing TransactionsContainer and new transactions list
             ],
           ),
-          AddMoneyButton(),
+          const AddMoneyButton(),
         ],
       ),
     );
@@ -63,7 +65,7 @@ class DashboardPage extends StatelessWidget {
 class MoneyCardWidget extends StatelessWidget {
   final double amount;
 
-  MoneyCardWidget({required this.amount});
+  const MoneyCardWidget({super.key, required this.amount});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,7 @@ class MoneyCardWidget extends StatelessWidget {
       ),
       child: Container(
         width: MediaQuery.of(context).size.width / 1.5,
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         decoration: BoxDecoration(
           color: dashboardActiveCard,
           borderRadius: BorderRadius.circular(25.0),
@@ -83,7 +85,7 @@ class MoneyCardWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Physical Money',
               style: TextStyle(
                 fontFamily: 'Poppins',
@@ -91,14 +93,14 @@ class MoneyCardWidget extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 12.0,
             ),
             Row(
               children: [
                 Text(
                   '₱ $amount',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold,
@@ -106,7 +108,7 @@ class MoneyCardWidget extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20.0),
+                  padding: const EdgeInsets.only(left: 20.0),
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -115,11 +117,11 @@ class MoneyCardWidget extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: seconDarkBg,
-                      shape: CircleBorder(),
-                      padding: EdgeInsets.all(20.0),
+                      backgroundColor: seconDarkBg,
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(20.0),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.add,
                       color: Color(0xFFD5D0CA),
                     ),
@@ -135,6 +137,9 @@ class MoneyCardWidget extends StatelessWidget {
 }
 
 class AddMoneyButton extends StatelessWidget {
+  const AddMoneyButton({super.key});
+
+  @override
   Widget build(BuildContext context) {
     return Positioned(
       bottom: 70.0,
@@ -147,16 +152,16 @@ class AddMoneyButton extends StatelessWidget {
           );
         },
         style: ElevatedButton.styleFrom(
-          primary: seconDarkBg,
+          backgroundColor: seconDarkBg,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(13.0),
           ),
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: 15.0,
             vertical: 20.0,
           ),
         ),
-        child: Text(
+        child: const Text(
           '+ Add Expenses',
           style: TextStyle(
             color: lightText,
@@ -171,17 +176,19 @@ class AddMoneyButton extends StatelessWidget {
 }
 
 class TransactionsWidget extends StatelessWidget {
+  const TransactionsWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Transactions',
                 style: TextStyle(
                   color: darkText,
@@ -198,7 +205,7 @@ class TransactionsWidget extends StatelessWidget {
                         builder: (context) => ViewTransactionsPage()),
                   );
                 },
-                child: Text(
+                child: const Text(
                   'View All',
                   style: TextStyle(
                     color: viewAllButton,
@@ -210,8 +217,8 @@ class TransactionsWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8.0),
-          Text(
+          const SizedBox(height: 8.0),
+          const Text(
             'Today',
             style: TextStyle(
               color: darkText,
@@ -227,14 +234,17 @@ class TransactionsWidget extends StatelessWidget {
 }
 
 class TransactionListWidget extends StatelessWidget {
+  const TransactionListWidget({super.key});
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
-        children: [
+        children: const [
           TransactionListItem(
             title: 'Movie',
             description:
-                'rororrororrororrororrororrororrororrororrororrororrororrororrororroror',
+            'rororrororrororrororrororrororrororrororrororrororrororrororrororroror',
             amount: -700,
             icon: entertainmentIcon,
           ),
@@ -274,10 +284,10 @@ class TransactionListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.symmetric(horizontal: 50.0, vertical: 8.0),
+      padding: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 8.0),
       decoration: BoxDecoration(
-        color: Color(0xFFD5D0CA),
+        color: const Color(0xFFD5D0CA),
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Column(
@@ -291,13 +301,13 @@ class TransactionListItem extends StatelessWidget {
                 height: 35.0,
                 // You may need to adjust the image asset path based on your project structure
               ),
-              SizedBox(width: 8.0), // Add some spacing between icon and text
+              const SizedBox(width: 8.0), // Add some spacing between icon and text
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '$title',
-                    style: TextStyle(
+                    title,
+                    style: const TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0,
@@ -309,7 +319,7 @@ class TransactionListItem extends StatelessWidget {
           ),
           Text(
             'Money Deducted: $amount',
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w400,
               fontSize: 16.0,
@@ -317,7 +327,7 @@ class TransactionListItem extends StatelessWidget {
           ),
           Text(
             'Description: $description',
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w400,
               fontSize: 16.0,
