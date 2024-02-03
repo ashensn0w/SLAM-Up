@@ -3,12 +3,14 @@ import 'package:slam_up/utils/constants.dart';
 import 'dashboard_page.dart';
 
 class AddMoneyPage extends StatelessWidget {
+  const AddMoneyPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primLightBg, // Use your desired background color
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Add Money',
           style: TextStyle(
             color: darkText, // Use your desired text color
@@ -34,8 +36,8 @@ class AddMoneyPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 10), // Adjust the spacing as needed
-              Column(
+              const SizedBox(height: 10), // Adjust the spacing as needed
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -94,8 +96,8 @@ class AddMoneyPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Title',
                 style: TextStyle(
                   fontFamily: 'Poppins',
@@ -105,14 +107,14 @@ class AddMoneyPage extends StatelessWidget {
                 ),
               ),
               TextField(
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Poppins',
                   color: darkText,
                   // Add other style properties as needed
                 ),
                 decoration: InputDecoration(
                   hintText: 'Enter title',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     fontFamily: 'Poppins',
                     // Add other hint style properties as needed
                   ),
@@ -120,18 +122,18 @@ class AddMoneyPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                         10.0), // Adjust the radius as needed
                     borderSide:
-                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                    const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide:
-                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                    const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
                   ),
                 ),
-                cursorColor: Color(0xFF2F2C2C),
+                cursorColor: const Color(0xFF2F2C2C),
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Spending Limit',
                 style: TextStyle(
                   fontFamily: 'Poppins',
@@ -141,14 +143,14 @@ class AddMoneyPage extends StatelessWidget {
                 ),
               ),
               TextField(
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Poppins',
                   color: darkText,
                   // Add other style properties as needed
                 ),
                 decoration: InputDecoration(
                   hintText: 'Enter spending limit',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     fontFamily: 'Poppins',
                     // Add other hint style properties as needed
                   ),
@@ -156,18 +158,18 @@ class AddMoneyPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                         10.0), // Adjust the radius as needed
                     borderSide:
-                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                    const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide:
-                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                    const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
                   ),
                 ),
-                cursorColor: Color(0xFF2F2C2C),
+                cursorColor: const Color(0xFF2F2C2C),
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Description',
                 style: TextStyle(
                   fontFamily: 'Poppins',
@@ -177,14 +179,14 @@ class AddMoneyPage extends StatelessWidget {
                 ),
               ),
               TextField(
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Poppins',
                   color: darkText,
                   // Add other style properties as needed
                 ),
                 decoration: InputDecoration(
                   hintText: 'Enter description',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     fontFamily: 'Poppins',
                     // Add other hint style properties as needed
                   ),
@@ -192,38 +194,38 @@ class AddMoneyPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                         10.0), // Adjust the radius as needed
                     borderSide:
-                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                    const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide:
-                        BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                    const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
                   ),
                 ),
-                cursorColor: Color(0xFF2F2C2C),
+                cursorColor: const Color(0xFF2F2C2C),
                 maxLines: null,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Align(
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DashboardPage()),
+                      MaterialPageRoute(builder: (context) => const DashboardPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: seconDarkBg,
+                    backgroundColor: seconDarkBg,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(13.0),
                     ),
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 15.0,
                       vertical: 20.0,
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Save',
                     style: TextStyle(
                       color: lightText,
@@ -234,30 +236,6 @@ class AddMoneyPage extends StatelessWidget {
                   ),
                 ),
               ),
-              /*Center(
-                child: ElevatedButton(
-                  onPressed: attachFile,
-                  child: Text(
-                    'Attach a File',
-                    style: TextStyle(
-                      color: darkText,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xFFD5D0CA),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(13.0),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width / 3,
-                      vertical: 25.0,
-                    ),
-                  ),
-                ),
-              ),*/
             ],
           ),
         ),
