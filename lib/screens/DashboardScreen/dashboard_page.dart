@@ -4,6 +4,8 @@ import '../DashboardScreen/add_money_page.dart';
 import '../DashboardScreen/add_expenses_page.dart';
 import '../DashboardScreen/view_transactions_page.dart';
 import '../notification_page.dart';
+import '../summary_page.dart';
+import '../profile_page.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -58,9 +60,81 @@ class DashboardPage extends StatelessWidget {
           const AddMoneyButton(),
         ],
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }
+
+class CustomBottomNavigationBar extends StatelessWidget {
+  const CustomBottomNavigationBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      decoration: BoxDecoration(
+        color: navBarBg,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 5,
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          IconButton(
+            icon: Image.asset(
+              dashboardSelected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DashboardPage()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Image.asset(
+              summaryUnselected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SummaryPage()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Image.asset(
+              financialContentsUnselected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SummaryPage()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Image.asset(
+              profileUnselected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 
 class MoneyCardWidget extends StatelessWidget {
   final double amount;
@@ -113,7 +187,7 @@ class MoneyCardWidget extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AddMoneyPage()),
+                        MaterialPageRoute(builder: (context) => const AddMoneyPage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -142,13 +216,13 @@ class AddMoneyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 70.0,
+      bottom: 20.0,
       right: 20.0,
       child: ElevatedButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddExpensesPage()),
+            MaterialPageRoute(builder: (context) => const AddExpensesPage()),
           );
         },
         style: ElevatedButton.styleFrom(
@@ -202,7 +276,7 @@ class TransactionsWidget extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ViewTransactionsPage()),
+                        builder: (context) => const ViewTransactionsPage()),
                   );
                 },
                 child: const Text(
