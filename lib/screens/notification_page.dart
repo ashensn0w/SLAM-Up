@@ -1,65 +1,57 @@
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 
-class NotificationsPage extends StatefulWidget {
-  @override
-  _NotificationsPageState createState() => _NotificationsPageState();
-}
-
-class _NotificationsPageState extends State<NotificationsPage> {
+class NotificationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2, // Number of tabs
-      child: Scaffold(
-        backgroundColor: primLightBg,
-        appBar: AppBar(
-          title: Text(
-            'Notifications',
-            style: TextStyle(
-              color: darkText,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-              fontSize: 26.0,
-            ),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: GestureDetector(
-            onTap: () {
-              // Handle back button press as needed
-              Navigator.pop(context);
-            },
-            child: Image.asset(
-              darkBackButton,
-            ),
-          ),
-          bottom: TabBar(
-            tabs: [
-              Tab(text: 'Unread'),
-              Tab(text: 'All'),
-            ],
+    return Scaffold(
+      backgroundColor: primLightBg,
+      appBar: AppBar(
+        title: Text(
+          'Notifications',
+          style: TextStyle(
+            color: darkText,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+            fontSize: 26.0,
           ),
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            color: Color(0xFFFAF7F3), // Set container color to "D9D9D9"
-            borderRadius: BorderRadius.circular(15.0), // Set border radius
-          ),
-          margin: EdgeInsets.all(20.0), // Adjust margin as needed
-          child: TabBarView(
-            children: [
-              // Unread tab content
-              Center(
-                child: Text('Unread Notifications'),
-              ),
-              // All tab content
-              Center(
-                child: Text('All Notifications'),
-              ),
-            ],
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Image.asset(
+            darkBackButton,
           ),
         ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.85,
+                decoration: BoxDecoration(
+                  color: seconDarkBg,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    decoration: BoxDecoration(
+                      color: primLightBg,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
