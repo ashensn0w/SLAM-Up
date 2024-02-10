@@ -48,19 +48,19 @@ class DashboardPage extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 4,
                 child: const Center(
-                  child: MoneyCardWidget(amount: 69000.0),
+                  child: MoneyCard(amount: 69000.0),
                 ),
               ),
               const SizedBox(height: 20.0),
-              const TransactionsWidget(),
+              const ViewAllButton(),
               const SizedBox(height: 10.0),
-              const TransactionListWidget(), // Add spacing between existing TransactionsContainer and new transactions list
+              const TransactionList(),
             ],
           ),
-          const AddMoneyButton(),
+          const AddExpensesButton(),
         ],
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }
@@ -92,7 +92,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DashboardPage()),
+                MaterialPageRoute(builder: (context) => const DashboardPage()),
               );
             },
           ),
@@ -125,7 +125,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfilePage()),
+                MaterialPageRoute(builder: (context) => const ProfilePage()),
               );
             },
           ),
@@ -136,10 +136,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
 }
 
 
-class MoneyCardWidget extends StatelessWidget {
+class MoneyCard extends StatelessWidget {
   final double amount;
 
-  const MoneyCardWidget({super.key, required this.amount});
+  const MoneyCard({super.key, required this.amount});
 
   @override
   Widget build(BuildContext context) {
@@ -210,8 +210,8 @@ class MoneyCardWidget extends StatelessWidget {
   }
 }
 
-class AddMoneyButton extends StatelessWidget {
-  const AddMoneyButton({super.key});
+class AddExpensesButton extends StatelessWidget {
+  const AddExpensesButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -249,8 +249,8 @@ class AddMoneyButton extends StatelessWidget {
   }
 }
 
-class TransactionsWidget extends StatelessWidget {
-  const TransactionsWidget({super.key});
+class ViewAllButton extends StatelessWidget {
+  const ViewAllButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -307,47 +307,46 @@ class TransactionsWidget extends StatelessWidget {
   }
 }
 
-class TransactionListWidget extends StatelessWidget {
-  const TransactionListWidget({super.key});
+class TransactionList extends StatelessWidget {
+  const TransactionList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
         children: const [
-          TransactionListItem(
+          TransactionListWidget(
             title: 'Movie',
             description:
             'rororrororrororrororrororrororrororrororrororrororrororrororrororroror',
-            amount: -700,
+            amount: 700,
             icon: entertainmentIcon,
           ),
-          TransactionListItem(
+          TransactionListWidget(
             title: 'Racket',
             description: 'For sports',
-            amount: -1500,
+            amount: 1500,
             icon: healthIcon,
           ),
-          TransactionListItem(
+          TransactionListWidget(
             title: 'Food',
             description: 'Groceries',
-            amount: -2000,
+            amount: 2000,
             icon: foodIcon,
           ),
-          // Add more TransactionListItem widgets as needed
         ],
       ),
     );
   }
 }
 
-class TransactionListItem extends StatelessWidget {
+class TransactionListWidget extends StatelessWidget {
   final String title;
   final String description;
   final double amount;
   final String icon;
 
-  const TransactionListItem({
+  const TransactionListWidget({
     Key? key,
     required this.title,
     required this.description,
@@ -373,9 +372,8 @@ class TransactionListItem extends StatelessWidget {
                 icon,
                 width: 35.0,
                 height: 35.0,
-                // You may need to adjust the image asset path based on your project structure
               ),
-              const SizedBox(width: 8.0), // Add some spacing between icon and text
+              const SizedBox(width: 8.0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
