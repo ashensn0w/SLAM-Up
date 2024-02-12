@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ProfilePage extends StatelessWidget {
-  ProfilePage({Key? key, }) : super(key: key);
+  ProfilePage({
+    Key? key,
+    required this.fullname,
+    required this.email,
+    required this.birthdate,
+    required this.sex,
+  }) : super(key: key);
+
+
+  String fullname;
+  String email;
+  String birthdate;
+  String sex;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       /*appBar: AppBar(
         title: Text('Profile'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {},
+          ),
+        ],
       ),*/
       body: ListView(
         children: [
@@ -90,28 +109,28 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Name",
+                Text(fullname,
                     style: const TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
                     )),
                 const SizedBox(height: 4.0),
-                Text("example@gmail.com",
+                Text(email,
                     style: const TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     )),
                 const SizedBox(height: 4.0),
-                Text("2024-02-17",
+                Text(birthdate,
                     style: const TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     )),
                 const SizedBox(height: 4.0),
-                Text('Sex',
+                Text(sex,
                     style: const TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
@@ -126,7 +145,7 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(
             height: 3.0,
             child: ColoredBox(
-              color: Color(0xFF43817F), 
+              color: Color(0xFF43817F),
             ),
           ),
           Padding(
@@ -160,16 +179,50 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
-
-
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
+
   @override
   State<EditProfile> createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+
+  final _fullnameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _birthdateController = TextEditingController();
+  final _sexController = TextEditingController();
+
+  _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Required'),
+          content: const Text('Any field cannot be empty'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,7 +234,8 @@ class _EditProfileState extends State<EditProfile> {
           height: 270,
           width: 400,
           child: ColoredBox(
-            color: const Color(0xFF43817F), 
+            color: const Color(0xFF43817F),
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -216,12 +270,12 @@ class _EditProfileState extends State<EditProfile> {
                         style: TextStyle(
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.bold,
-                          //backgroundColor: Colors.grey,
                           fontSize: 16,
                         )),
                   ],
                 ),
                 TextFormField(
+                  controller: _fullnameController,
                   decoration: const InputDecoration(
                     labelText: 'Full name', 
                     border: OutlineInputBorder(), 
@@ -236,15 +290,16 @@ class _EditProfileState extends State<EditProfile> {
                     Text('Email',
                         style: TextStyle(
                           fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold,         
                           fontSize: 16,
                         )),
                   ],
                 ),
                 TextField(
+                  controller: _emailController,
                   decoration: const InputDecoration(
-                    labelText: 'Email', // Optional label
-                    border: OutlineInputBorder(), // Optional border
+                    labelText: 'Email',
+                    border: OutlineInputBorder(), 
                   ),
                 ),
                 const SizedBox(
@@ -256,17 +311,18 @@ class _EditProfileState extends State<EditProfile> {
                     Text('Birthdate',
                         style: TextStyle(
                           fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold,            
                           fontSize: 16,
                         )),
                   ],
                 ),
                 TextField(
+                  controller: _birthdateController,
                   decoration: const InputDecoration(
-                    labelText: 'Birthdate', // Optional label
-                    border: OutlineInputBorder(), // Optional border
+                    labelText: 'Birthdate',
+                    border: OutlineInputBorder(), 
                   ),
-                ),
+                ),               
                 const SizedBox(
                   height: 20,
                 ),
@@ -276,17 +332,18 @@ class _EditProfileState extends State<EditProfile> {
                     Text('Sex',
                         style: TextStyle(
                           fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold,                 
                           fontSize: 16,
                         )),
                   ],
                 ),
                 TextField(
+                  controller: _sexController,
                   decoration: InputDecoration(
-                    labelText: 'Sex', // Optional label
-                    border: OutlineInputBorder(), // Optional border
+                    labelText: 'Sex',
+                    border: OutlineInputBorder(),
                   ),
-                ),
+                ),        
               ],
             ),
           ),
@@ -323,7 +380,26 @@ class _EditProfileState extends State<EditProfile> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (_fullnameController.text.isEmpty |
+                      _emailController.text.isEmpty |
+                      _birthdateController.text.isEmpty |
+                      _sexController.text.isEmpty) {
+                    _showErrorDialog(
+                        context, 'The text field cannot be empty.');
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfilePage(
+                                fullname: _fullnameController.text,
+                                email: _emailController.text,
+                                birthdate: _birthdateController.text,
+                                sex: _sexController.text,
+                              )),
+                    );
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xff52dc57),
                   shape: RoundedRectangleBorder(
