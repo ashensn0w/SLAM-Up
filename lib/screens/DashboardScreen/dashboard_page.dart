@@ -5,7 +5,6 @@ import '../DashboardScreen/add_expenses_page.dart';
 import '../DashboardScreen/view_transactions_page.dart';
 import '../notification_page.dart';
 import '../summary_page.dart';
-import '../profile_page.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -125,7 +124,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
+                MaterialPageRoute(builder: (context) => SummaryPage()),
               );
             },
           ),

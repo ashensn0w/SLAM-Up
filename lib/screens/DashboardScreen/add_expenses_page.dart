@@ -2,18 +2,60 @@ import 'package:flutter/material.dart';
 import 'package:slam_up/utils/constants.dart';
 import 'dashboard_page.dart';
 
-class AddExpensesPage extends StatelessWidget {
-  const AddExpensesPage({super.key});
+class AddExpensesPage extends StatefulWidget {
+  const AddExpensesPage({Key? key}) : super(key: key);
+
+  @override
+  State<AddExpensesPage> createState() => _AddExpensesPageState();
+}
+
+class _AddExpensesPageState extends State<AddExpensesPage> {
+  final TextEditingController amountController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+
+  String? selectedCategory;
+
+  @override
+  void dispose() {
+    amountController.dispose();
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
+  void _saveExpense() {
+    final double amount = double.tryParse(amountController.text) ?? 0.0;
+    final String title = titleController.text;
+    final String description = descriptionController.text;
+
+    if (amount <= 0 || selectedCategory == null || title.isEmpty || description.isEmpty) {
+      // Handle validation error here
+      return;
+    }
+
+    // Assuming you have a method to save data to a database or somewhere else
+    // Here, we'll just print the data
+    print('Amount: $amount');
+    print('Tag: $selectedCategory');
+    print('Title: $title');
+    print('Description: $description');
+
+    // Navigate back to the dashboard or wherever you want after saving
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => DashboardPage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primLightBg, // Use your desired background color
+      backgroundColor: primLightBg,
       appBar: AppBar(
         title: const Text(
           'Add Expenses',
           style: TextStyle(
-            color: darkText, // Use your desired text color
+            color: darkText,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.bold,
             fontSize: 26.0,
@@ -31,188 +73,174 @@ class AddExpensesPage extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 10), // Adjust the spacing as needed
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Amount',
-                    style: TextStyle(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 10),
+            const Text(
+              'Amount',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 15.0,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF6B6A66),
+              ),
+            ),
+            const SizedBox(height: 15),
+            Row(
+              children: [
+                const Text(
+                  '₱',
+                  style: TextStyle(
+                    fontSize: 28.0,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.bold,
+                    color: darkText,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: TextField(
+                    controller: amountController,
+                    keyboardType: TextInputType.number,
+                    style: const TextStyle(
                       fontFamily: 'Poppins',
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF6B6A66),
+                      color: darkText,
                     ),
+                    decoration: const InputDecoration(
+                      hintText: 'Enter amount',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Poppins',
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF2F2C2C)),
+                      ),
+                    ),
+                    cursorColor: const Color(0xFF2F2C2C),
                   ),
-                  SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Text(
-                        '₱', // Philippine Peso symbol
-                        style: TextStyle(
-                          fontSize: 28.0,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold,
-                          color: darkText,
-                        ),
-                      ),
-                      SizedBox(width: 10), // Adjust spacing as needed
-                      Expanded(
-                        child: TextField(
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: darkText,
-                            // Add other style properties as needed
-                          ),
-                          decoration: InputDecoration(
-                            hintText: 'Enter amount',
-                            hintStyle: TextStyle(
-                              fontFamily: 'Poppins',
-                              // Add other hint style properties as needed
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFF2F2C2C)),
-                            ),
-                          ),
-                          cursorColor: Color(0xFF2F2C2C),
-                        ),
-                      ),
-                      SizedBox(width: 10), // Adjust spacing as needed
-                      Text(
-                        'PHP',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF6B6A66),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Tag',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
                 ),
-              ),
-              const MyDropdown(),
-              const SizedBox(height: 20),
-              const Text(
-                'Title',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                  color: darkText,
-                ),
-              ),
-              TextField(
-                style: const TextStyle(
-                  fontFamily: 'Poppins',
-                  color: darkText,
-                  // Add other style properties as needed
-                ),
-                decoration: InputDecoration(
-                  hintText: 'Enter title',
-                  hintStyle: const TextStyle(
+                const SizedBox(width: 10),
+                const Text(
+                  'PHP',
+                  style: TextStyle(
+                    fontSize: 15.0,
                     fontFamily: 'Poppins',
-                    // Add other hint style properties as needed
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                        10.0), // Adjust the radius as needed
-                    borderSide:
-                        const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide:
-                        const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF6B6A66),
                   ),
                 ),
-                cursorColor: const Color(0xFF2F2C2C),
+              ],
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Tag',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16.0,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
               ),
-              const SizedBox(height: 20),
-              const Text(
-                'Description',
-                style: TextStyle(
+            ),
+            MyDropdown(
+              onChanged: (value) {
+                setState(() {
+                  selectedCategory = value;
+                });
+              },
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Title',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16.0,
+                fontWeight: FontWeight.w500,
+                color: darkText,
+              ),
+            ),
+            TextField(
+              controller: titleController,
+              style: const TextStyle(
+                fontFamily: 'Poppins',
+                color: darkText,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Enter title',
+                hintStyle: const TextStyle(
                   fontFamily: 'Poppins',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                  color: darkText,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
                 ),
               ),
-              TextField(
-                style: const TextStyle(
+              cursorColor: const Color(0xFF2F2C2C),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Description',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16.0,
+                fontWeight: FontWeight.w500,
+                color: darkText,
+              ),
+            ),
+            TextField(
+              controller: descriptionController,
+              style: const TextStyle(
+                fontFamily: 'Poppins',
+                color: darkText,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Enter description',
+                hintStyle: const TextStyle(
                   fontFamily: 'Poppins',
-                  color: darkText,
-                  // Add other style properties as needed
                 ),
-                decoration: InputDecoration(
-                  hintText: 'Enter description',
-                  hintStyle: const TextStyle(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
+                ),
+              ),
+              cursorColor: const Color(0xFF2F2C2C),
+              maxLines: null,
+            ),
+            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.centerRight,
+              child: ElevatedButton(
+                onPressed: _saveExpense,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: seconDarkBg,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(13.0),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15.0,
+                    vertical: 20.0,
+                  ),
+                ),
+                child: const Text(
+                  'Save',
+                  style: TextStyle(
+                    color: lightText,
                     fontFamily: 'Poppins',
-                    // Add other hint style properties as needed
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                        10.0), // Adjust the radius as needed
-                    borderSide:
-                        const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide:
-                        const BorderSide(color: Color(0xFFA9A9A9), width: 2.0),
-                  ),
-                ),
-                cursorColor: const Color(0xFF2F2C2C),
-                maxLines: null,
-              ),
-              const SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerRight,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const DashboardPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: seconDarkBg,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(13.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 15.0,
-                      vertical: 20.0,
-                    ),
-                  ),
-                  child: const Text(
-                    'Save',
-                    style: TextStyle(
-                      color: lightText,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -220,11 +248,12 @@ class AddExpensesPage extends StatelessWidget {
 }
 
 class MyDropdown extends StatefulWidget {
-  const MyDropdown({super.key});
+  final ValueChanged<String>? onChanged;
+
+  const MyDropdown({Key? key, this.onChanged}) : super(key: key);
 
   @override
   State<MyDropdown> createState() => _MyDropdownState();
-  //_MyDropdownState createState() => _MyDropdownState();
 }
 
 class _MyDropdownState extends State<MyDropdown> {
@@ -268,17 +297,16 @@ class _MyDropdownState extends State<MyDropdown> {
             );
           }).toList(),
           onChanged: (String? value) {
+            widget.onChanged?.call(value ?? '');
             setState(() {
               selectedCategory = value;
             });
-            // Handle the selected value
           },
           hint: Text(
             selectedCategory ?? 'Select category',
             style: TextStyle(
               fontFamily: 'Poppins',
-              color:
-                  selectedCategory != null ? Colors.black : const Color(0xFFA9A9A9),
+              color: selectedCategory != null ? Colors.black : const Color(0xFFA9A9A9),
             ),
           ),
           value: selectedCategory,
