@@ -57,50 +57,60 @@ class DashboardPage extends StatelessWidget {
               const SizedBox(height: 10.0),
               if (expenseData != null) ...[
                 Container(
-                  padding: const EdgeInsets.all(15.0),
-                  margin: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 8.0),
-                  width: MediaQuery.of(context).size.width * 0.8,
+                  padding: const EdgeInsets.all(20.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 8.0),
+                  width: MediaQuery.of(context).size.width * 0.7,
                   decoration: BoxDecoration(
                     color: const Color(0xFFD5D0CA),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  child: Row(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
-                        tagIcons[expenseData!['tag']] ?? Icons.error,
-                        size: 30,
-                      ),
-                      const SizedBox(width: 10),
-                      Column(
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Icon(
+                            tagIcons[expenseData!['tag']] ?? Icons.error,
+                            size: 30,
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${expenseData!['title']}',
+                                  style: const TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           Text(
-                            '${expenseData!['title']}',
+                            '-${expenseData!['amount']}',
                             style: const TextStyle(
+                              color: transactionDeduct,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0,
                             ),
                           ),
-                          Text(
-                            'Money Deducted: ${expenseData!['amount']}',
-                            style: const TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Text(
-                            'Description: ${expenseData!['description']}',
-                            style: const TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16.0,
-                            ),
-                          ),
                         ],
+                      ),
+                      const SizedBox(height: 10), // Add spacing between rows
+                      Text(
+                        'Description: ${expenseData!['description']}',
+                        style: const TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16.0,
+                        ),
                       ),
                     ],
                   ),
