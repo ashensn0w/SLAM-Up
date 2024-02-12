@@ -10,7 +10,6 @@ class ProfilePage extends StatelessWidget {
     required this.sex,
   }) : super(key: key);
 
-
   String fullname;
   String email;
   String birthdate;
@@ -50,7 +49,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   CircleAvatar(
                     radius: 55,
-                    backgroundColor: Colors.white,
+                    backgroundColor: Colors.white,   
                   ),
                   const SizedBox(
                     height: 20,
@@ -88,7 +87,7 @@ class ProfilePage extends StatelessWidget {
           ),
           const SizedBox(
             child: ColoredBox(
-              color: Color(0xffe8e4af), 
+              color: Color(0xffe8e4af),
 
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
@@ -199,11 +198,24 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-
   final _fullnameController = TextEditingController();
   final _emailController = TextEditingController();
   final _birthdateController = TextEditingController();
   final _sexController = TextEditingController();
+
+  Future<void> _birthdate() async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1950),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null) {
+      setState(() {
+        _birthdateController.text = picked.toString().split(" ")[0];
+      });
+    }
+  }
 
   _showErrorDialog(BuildContext context, String message) {
     showDialog(
@@ -235,7 +247,6 @@ class _EditProfileState extends State<EditProfile> {
           width: 400,
           child: ColoredBox(
             color: const Color(0xFF43817F),
-
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -248,7 +259,7 @@ class _EditProfileState extends State<EditProfile> {
                         fontSize: 20,
                         color: Colors.white,
                       )),
-                ),
+                ),        
                 const CircleAvatar(
                   radius: 55,
                   backgroundColor: Colors.white,
@@ -266,7 +277,7 @@ class _EditProfileState extends State<EditProfile> {
                 const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Fullname',
+                    Text('Full Name',
                         style: TextStyle(
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.bold,
@@ -274,11 +285,11 @@ class _EditProfileState extends State<EditProfile> {
                         )),
                   ],
                 ),
-                TextFormField(
+                TextField(
                   controller: _fullnameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Full name', 
-                    border: OutlineInputBorder(), 
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
                   ),
                 ),
                 const SizedBox(
@@ -290,16 +301,17 @@ class _EditProfileState extends State<EditProfile> {
                     Text('Email',
                         style: TextStyle(
                           fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,         
+                          fontWeight: FontWeight.bold,
                           fontSize: 16,
                         )),
                   ],
                 ),
                 TextField(
                   controller: _emailController,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(), 
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ), // Optional border
                   ),
                 ),
                 const SizedBox(
@@ -311,18 +323,28 @@ class _EditProfileState extends State<EditProfile> {
                     Text('Birthdate',
                         style: TextStyle(
                           fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,            
+                          fontWeight: FontWeight.bold,
                           fontSize: 16,
                         )),
                   ],
                 ),
                 TextField(
                   controller: _birthdateController,
-                  decoration: const InputDecoration(
-                    labelText: 'Birthdate',
-                    border: OutlineInputBorder(), 
-                  ),
-                ),               
+                  decoration: InputDecoration(
+                      labelText: 'Select Date',
+                      filled: true,
+                      suffixIcon: Icon(Icons.calendar_today),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: BorderSide(color: Colors.grey)),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                      )),
+                  readOnly: true,
+                  onTap: () {
+                    _birthdate();
+                  },
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -332,7 +354,7 @@ class _EditProfileState extends State<EditProfile> {
                     Text('Sex',
                         style: TextStyle(
                           fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,                 
+                          fontWeight: FontWeight.bold,
                           fontSize: 16,
                         )),
                   ],
@@ -340,10 +362,11 @@ class _EditProfileState extends State<EditProfile> {
                 TextField(
                   controller: _sexController,
                   decoration: InputDecoration(
-                    labelText: 'Sex',
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ), // Optional border
                   ),
-                ),        
+                ),
               ],
             ),
           ),
