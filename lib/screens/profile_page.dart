@@ -49,7 +49,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   CircleAvatar(
                     radius: 55,
-                    backgroundColor: Colors.white,   
+                    backgroundColor: Colors.white,              
                   ),
                   const SizedBox(
                     height: 20,
@@ -87,7 +87,7 @@ class ProfilePage extends StatelessWidget {
           ),
           const SizedBox(
             child: ColoredBox(
-              color: Color(0xffe8e4af),
+              color: Color(0xffe8e4af), 
 
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
@@ -99,9 +99,6 @@ class ProfilePage extends StatelessWidget {
                     )),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
           ),
           Padding(
             padding: const EdgeInsets.all(22.0),
@@ -144,7 +141,7 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(
             height: 3.0,
             child: ColoredBox(
-              color: Color(0xFF43817F),
+              color: Color(0xFF43817F), 
             ),
           ),
           Padding(
@@ -198,10 +195,10 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+
   final _fullnameController = TextEditingController();
   final _emailController = TextEditingController();
   final _birthdateController = TextEditingController();
-  final _sexController = TextEditingController();
 
   Future<void> _birthdate() async {
     DateTime? picked = await showDatePicker(
@@ -216,6 +213,12 @@ class _EditProfileState extends State<EditProfile> {
       });
     }
   }
+
+  // Define a list of items for the dropdown menu
+  List<String> items = ['Male', 'Female', 'Prefer not to say'];
+
+  // Variable to hold the currently selected item
+  String sex = 'Male';
 
   _showErrorDialog(BuildContext context, String message) {
     showDialog(
@@ -259,11 +262,12 @@ class _EditProfileState extends State<EditProfile> {
                         fontSize: 20,
                         color: Colors.white,
                       )),
-                ),        
+                ),
                 const CircleAvatar(
                   radius: 55,
                   backgroundColor: Colors.white,
                 ),
+                //const SizedBox(height: 20),        
               ],
             ),
           ),
@@ -331,7 +335,6 @@ class _EditProfileState extends State<EditProfile> {
                 TextField(
                   controller: _birthdateController,
                   decoration: InputDecoration(
-                      labelText: 'Select Date',
                       filled: true,
                       suffixIcon: Icon(Icons.calendar_today),
                       enabledBorder: OutlineInputBorder(
@@ -359,14 +362,36 @@ class _EditProfileState extends State<EditProfile> {
                         )),
                   ],
                 ),
-                TextField(
-                  controller: _sexController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ), // Optional border
+                //--------------------------dropdown for sex---------------
+                Center(
+                  child: DropdownButton<String>(
+                    borderRadius: BorderRadius.circular(10.0),
+                    value: sex,
+                    icon: const Icon(Icons.person_sharp),
+                    style: const TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.normal,
+                      fontSize: 16,
+                    ),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.grey,
+                    ),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        sex = newValue!;
+                      });
+                    },
+                    isExpanded: true,
+                    items: items.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                   ),
                 ),
+                //------------------------------------------------
               ],
             ),
           ),
@@ -406,8 +431,7 @@ class _EditProfileState extends State<EditProfile> {
                 onPressed: () {
                   if (_fullnameController.text.isEmpty |
                       _emailController.text.isEmpty |
-                      _birthdateController.text.isEmpty |
-                      _sexController.text.isEmpty) {
+                      _birthdateController.text.isEmpty) {
                     _showErrorDialog(
                         context, 'The text field cannot be empty.');
                   } else {
@@ -418,7 +442,7 @@ class _EditProfileState extends State<EditProfile> {
                                 fullname: _fullnameController.text,
                                 email: _emailController.text,
                                 birthdate: _birthdateController.text,
-                                sex: _sexController.text,
+                                sex: sex,
                               )),
                     );
                   }
