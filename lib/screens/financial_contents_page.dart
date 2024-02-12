@@ -4,8 +4,10 @@ import 'package:slam_up/utils/sizes.dart';
 import 'package:slam_up/utils/text.dart';
 
 class FinancialContents extends StatefulWidget {
+  const FinancialContents({super.key});
+
   @override
-  _FinancialContentsState createState() => _FinancialContentsState();
+  State<FinancialContents> createState() => _FinancialContentsState();
 }
 
 class _FinancialContentsState extends State<FinancialContents> {
@@ -18,13 +20,13 @@ class _FinancialContentsState extends State<FinancialContents> {
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 20.0),
+            margin: const EdgeInsets.only(top: 20.0),
             height: 60.0,
             width: 260,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: finContentBg, // Change the color as needed
                 borderRadius: BorderRadius.all(Radius.circular(120.0))),
-            child: Align(
+            child: const Align(
               alignment: Alignment.center,
               child: Text(
                 'Financial Content',
@@ -37,7 +39,7 @@ class _FinancialContentsState extends State<FinancialContents> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 13.0,
           ),
           Row(
@@ -65,7 +67,7 @@ class _FinancialContentsState extends State<FinancialContents> {
             child: Container(
               height: 100.0, // Set the desired height
               color: Colors.green, // Change the color as needed
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Container in Articles Tab',
                   style: TextStyle(
@@ -113,7 +115,7 @@ class TabText extends StatelessWidget {
       onTap: onTap,
       child: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: 'Poppins',
           color: darkText, // Change the text color as needed
           fontSize: 20.0,
