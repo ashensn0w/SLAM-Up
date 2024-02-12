@@ -103,15 +103,29 @@ class DashboardPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10), // Add spacing between rows
-                      Text(
-                        'Description: ${expenseData!['description']}',
-                        style: const TextStyle(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16.0,
-                        ),
-                      ),
+                      const SizedBox(height: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Description:',
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            expenseData!['description'],
+                            style: const TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),
