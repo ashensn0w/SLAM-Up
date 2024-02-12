@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:slam_up/screens/signin_page.dart';
 import 'dart:async';
 import '../utils/constants.dart';
-import '../screens/DashboardScreen/dashboard_page.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
@@ -14,10 +16,10 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     // Wait for 2 seconds and then navigate to the signin page
     Timer(
-      Duration(seconds: 2),
+      const Duration(seconds: 2),
       () => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => DashboardPage(),
+          builder: (context) => const LoginScreen(),
         ),
       ),
     );
