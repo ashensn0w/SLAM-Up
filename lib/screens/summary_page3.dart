@@ -380,13 +380,34 @@ class _EditAllocationPageState extends State<EditAllocationPage> {
                     categoryControllers: categoryControllers,
                     percentageControllers: percentageControllers,
                     onSave: () {
-                      List<AllocationEntry> entries = [];
-                      for (int i = 0; i < categoryControllers.length; i++) {
-                        final category = categoryControllers[i].text;
-                        final percentage = double.tryParse(percentageControllers[i].text) ?? 0.0;
-                        entries.add(AllocationEntry(category, percentage));
+                      if (_validateInputs()) {
+                        List<AllocationEntry> entries = [];
+                        for (int i = 0; i < categoryControllers.length; i++) {
+                          final category = categoryControllers[i].text;
+                          final percentage = double.tryParse(percentageControllers[i].text) ?? 0.0;
+                          entries.add(AllocationEntry(category, percentage));
+                        }
+                        Navigator.pop(context, entries);
+                      } else {
+                        // Show error dialog
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Error'),
+                              content: Text('Fields cannot be empty.'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       }
-                      Navigator.pop(context, entries);
                     },
                   ),
                 ],
@@ -410,6 +431,20 @@ class _EditAllocationPageState extends State<EditAllocationPage> {
       totalPercentage += percentage;
     }
     return totalPercentage;
+  }
+
+  bool _validateInputs() {
+    for (var controller in categoryControllers) {
+      if (controller.text.isEmpty) {
+        return false;
+      }
+    }
+    for (var controller in percentageControllers) {
+      if (controller.text.isEmpty) {
+        return false;
+      }
+    }
+    return true;
   }
 
   void addCategory() {
@@ -473,7 +508,30 @@ class SaveButton extends StatelessWidget {
       height: 45,
       width: 110,
       child: ElevatedButton(
-        onPressed: onSave,
+        onPressed: () {
+          if (_validateInputs()) {
+            onSave();
+          } else {
+            // Show error dialog
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Error'),
+                  content: Text('Fields cannot be empty.'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('OK'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Color.fromRGBO(0, 139, 22, 1.0),
           elevation: 0,
@@ -491,6 +549,20 @@ class SaveButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool _validateInputs() {
+    for (var controller in categoryControllers) {
+      if (controller.text.isEmpty) {
+        return false;
+      }
+    }
+    for (var controller in percentageControllers) {
+      if (controller.text.isEmpty) {
+        return false;
+      }
+    }
+    return true;
   }
 }
 
@@ -538,4 +610,10 @@ class DecimalTextInputFormatter extends TextInputFormatter {
     double value = double.tryParse(newValue.text) ?? 0.0;
     return newValue.copyWith(text: value.toString());
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: SummaryPage3(),
+  ));
 }
