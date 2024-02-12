@@ -317,7 +317,7 @@ class TransactionList extends StatelessWidget {
           TransactionListWidget(
             title: 'Movie',
             description:
-            'rororrororrororrororrororrororrororrororrororrororrororrororrororroror',
+            'rororrororrororror',
             amount: 700,
             icon: entertainmentIcon,
           ),

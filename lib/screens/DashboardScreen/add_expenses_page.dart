@@ -14,7 +14,7 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  String? selectedCategory;
+  String? selectedTag;
 
   @override
   void dispose() {
@@ -29,7 +29,7 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
     final String title = titleController.text;
     final String description = descriptionController.text;
 
-    if (amount <= 0 || selectedCategory == null || title.isEmpty || description.isEmpty) {
+    if (amount <= 0 || selectedTag == null || title.isEmpty || description.isEmpty) {
       // Handle validation error here
       return;
     }
@@ -37,13 +37,12 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
     // Assuming you have a method to save data to a database or somewhere else
     // Here, we'll just print the data
     print('Amount: $amount');
-    print('Tag: $selectedCategory');
+    print('Tag: $selectedTag');
     print('Title: $title');
     print('Description: $description');
 
-    // Navigate back to the dashboard or wherever you want after saving
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => DashboardPage()),
+      MaterialPageRoute(builder: (context) => const DashboardPage()),
     );
   }
 
@@ -145,7 +144,7 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
             MyDropdown(
               onChanged: (value) {
                 setState(() {
-                  selectedCategory = value;
+                  selectedTag = value;
                 });
               },
             ),
@@ -257,7 +256,7 @@ class MyDropdown extends StatefulWidget {
 }
 
 class _MyDropdownState extends State<MyDropdown> {
-  String? selectedCategory;
+  String? selectedTag;
 
   @override
   Widget build(BuildContext context) {
@@ -299,17 +298,17 @@ class _MyDropdownState extends State<MyDropdown> {
           onChanged: (String? value) {
             widget.onChanged?.call(value ?? '');
             setState(() {
-              selectedCategory = value;
+              selectedTag = value;
             });
           },
           hint: Text(
-            selectedCategory ?? 'Select category',
+            selectedTag ?? 'Select category',
             style: TextStyle(
               fontFamily: 'Poppins',
-              color: selectedCategory != null ? Colors.black : const Color(0xFFA9A9A9),
+              color: selectedTag != null ? Colors.black : const Color(0xFFA9A9A9),
             ),
           ),
-          value: selectedCategory,
+          value: selectedTag,
         ),
       ),
     );
