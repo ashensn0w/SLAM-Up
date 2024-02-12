@@ -6,9 +6,16 @@ import '../DashboardScreen/view_transactions_page.dart';
 import '../notification_page.dart';
 import '../summary_page.dart';
 
-class DashboardPage extends StatelessWidget {
-  const DashboardPage({super.key});
+class DashboardPage extends StatefulWidget {
+  final String? expenseData; // Define the expenseData parameter
 
+  const DashboardPage({Key? key, this.expenseData}) : super(key: key);
+
+  @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,13 +60,38 @@ class DashboardPage extends StatelessWidget {
               const SizedBox(height: 20.0),
               const ViewAllButton(),
               const SizedBox(height: 10.0),
-              const TransactionList(),
+              widget.expenseData != null
+                  ? ExpenseDisplay(expenseData: widget.expenseData!)
+                  : const SizedBox(), // Use SizedBox if no expense data is available
             ],
           ),
           const AddExpensesButton(),
         ],
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
+    );
+  }
+}
+
+class ExpenseDisplay extends StatelessWidget {
+  final String expenseData;
+
+  const ExpenseDisplay({super.key, required this.expenseData});
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 20.0,
+      left: 20.0,
+      child: Text(
+        expenseData,
+        style: const TextStyle(
+          color: Colors.black,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+        ),
+      ),
     );
   }
 }
@@ -306,106 +338,107 @@ class ViewAllButton extends StatelessWidget {
   }
 }
 
-class TransactionList extends StatelessWidget {
-  const TransactionList({super.key});
+// class TransactionList extends StatelessWidget {
+//   const TransactionList({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Expanded(
+//       child: ListView(
+//         children: const [
+//           TransactionListWidget(
+//             title: 'Movie',
+//             description:
+//             'rororrororrororror',
+//             amount: 700,
+//             icon: entertainmentIcon,
+//           ),
+//           TransactionListWidget(
+//             title: 'Racket',
+//             description: 'For sports',
+//             amount: 1500,
+//             icon: healthIcon,
+//           ),
+//           TransactionListWidget(
+//             title: 'Food',
+//             description: 'Groceries',
+//             amount: 2000,
+//             icon: foodIcon,
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+//
+// class TransactionListWidget extends StatelessWidget {
+//   final String title;
+//   final String description;
+//   final double amount;
+//   final String icon;
+//
+//   const TransactionListWidget({
+//     Key? key,
+//     required this.title,
+//     required this.description,
+//     required this.amount,
+//     required this.icon,
+//   }) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.all(10.0),
+//       margin: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 8.0),
+//       decoration: BoxDecoration(
+//         color: const Color(0xFFD5D0CA),
+//         borderRadius: BorderRadius.circular(15.0),
+//       ),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Row(
+//             children: [
+//               Image.asset(
+//                 icon,
+//                 width: 35.0,
+//                 height: 35.0,
+//               ),
+//               const SizedBox(width: 8.0),
+//               Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Text(
+//                     title,
+//                     style: const TextStyle(
+//                       fontFamily: 'Poppins',
+//                       fontWeight: FontWeight.bold,
+//                       fontSize: 20.0,
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ],
+//           ),
+//           Text(
+//             'Money Deducted: $amount',
+//             style: const TextStyle(
+//               fontFamily: 'Poppins',
+//               fontWeight: FontWeight.w400,
+//               fontSize: 16.0,
+//             ),
+//           ),
+//           Text(
+//             'Description: $description',
+//             style: const TextStyle(
+//               fontFamily: 'Poppins',
+//               fontWeight: FontWeight.w400,
+//               fontSize: 16.0,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        children: const [
-          TransactionListWidget(
-            title: 'Movie',
-            description:
-            'rororrororrororror',
-            amount: 700,
-            icon: entertainmentIcon,
-          ),
-          TransactionListWidget(
-            title: 'Racket',
-            description: 'For sports',
-            amount: 1500,
-            icon: healthIcon,
-          ),
-          TransactionListWidget(
-            title: 'Food',
-            description: 'Groceries',
-            amount: 2000,
-            icon: foodIcon,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class TransactionListWidget extends StatelessWidget {
-  final String title;
-  final String description;
-  final double amount;
-  final String icon;
-
-  const TransactionListWidget({
-    Key? key,
-    required this.title,
-    required this.description,
-    required this.amount,
-    required this.icon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      margin: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 8.0),
-      decoration: BoxDecoration(
-        color: const Color(0xFFD5D0CA),
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Image.asset(
-                icon,
-                width: 35.0,
-                height: 35.0,
-              ),
-              const SizedBox(width: 8.0),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Text(
-            'Money Deducted: $amount',
-            style: const TextStyle(
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w400,
-              fontSize: 16.0,
-            ),
-          ),
-          Text(
-            'Description: $description',
-            style: const TextStyle(
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w400,
-              fontSize: 16.0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

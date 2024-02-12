@@ -36,13 +36,15 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
 
     // Assuming you have a method to save data to a database or somewhere else
     // Here, we'll just print the data
-    print('Amount: $amount');
-    print('Tag: $selectedTag');
-    print('Title: $title');
-    print('Description: $description');
+    final expenseData = 'Amount: $amount\nTag: $selectedTag\nTitle: $title\nDescription: $description'; // Construct the expense data
+    print(expenseData);
 
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => const DashboardPage()),
+      MaterialPageRoute(
+        builder: (context) => DashboardPage(
+          expenseData: expenseData, // Step 2: Pass the expense data back to DashboardPage
+        ),
+      ),
     );
   }
 
