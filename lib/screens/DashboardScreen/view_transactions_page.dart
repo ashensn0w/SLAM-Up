@@ -34,7 +34,7 @@ class ViewTransactionsPage extends StatelessWidget {
         children: [
           MyCalendar(),
           SizedBox(height: 15.0),
-          TransactionList(), // Wrap TransactionList in a Column directly
+          TransactionList(),
         ],
       ),
     );
@@ -97,7 +97,7 @@ class _MyCalendarState extends State<MyCalendar> {
                 color: darkText,
               ),
               selectedTextStyle: const TextStyle(
-                color: Color(0xFF39524F), // Set your desired color
+                color: Color(0xFF39524F),
                 fontWeight: FontWeight.bold,
               ),
               selectedDecoration: BoxDecoration(
@@ -109,7 +109,7 @@ class _MyCalendarState extends State<MyCalendar> {
                 ),
               ),
               todayTextStyle: const TextStyle(
-                color: Colors.white, // Set your desired color
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
               todayDecoration: const BoxDecoration(
