@@ -6,16 +6,11 @@ import '../DashboardScreen/view_transactions_page.dart';
 import '../notification_page.dart';
 import '../summary_page.dart';
 
-class DashboardPage extends StatefulWidget {
-  final String? expenseData; // Define the expenseData parameter
+class DashboardPage extends StatelessWidget {
+  final Map<String, dynamic>? expenseData;
 
   const DashboardPage({Key? key, this.expenseData}) : super(key: key);
 
-  @override
-  State<DashboardPage> createState() => _DashboardPageState();
-}
-
-class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,18 +49,21 @@ class _DashboardPageState extends State<DashboardPage> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 4,
                 child: const Center(
-                  child: MoneyCard(amount: 69000.0),
+                  child: MoneyCardWidget(amount: 69000.0),
                 ),
               ),
               const SizedBox(height: 20.0),
-              const ViewAllButton(),
+              const TransactionsWidget(),
               const SizedBox(height: 10.0),
-              widget.expenseData != null
-                  ? ExpenseDisplay(expenseData: widget.expenseData!)
-                  : const SizedBox(), // Use SizedBox if no expense data is available
+              if (expenseData != null) ...[
+                Text('Amount: ${expenseData!['amount']}'),
+                Text('Tag: ${expenseData!['tag']}'),
+                Text('Title: ${expenseData!['title']}'),
+                Text('Description: ${expenseData!['description']}'),
+              ],
             ],
           ),
-          const AddExpensesButton(),
+          const AddMoneyButton(),
         ],
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
@@ -73,28 +71,6 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 }
 
-class ExpenseDisplay extends StatelessWidget {
-  final String expenseData;
-
-  const ExpenseDisplay({super.key, required this.expenseData});
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: 20.0,
-      left: 20.0,
-      child: Text(
-        expenseData,
-        style: const TextStyle(
-          color: Colors.black,
-          fontFamily: 'Poppins',
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-        ),
-      ),
-    );
-  }
-}
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({super.key});
@@ -167,10 +143,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
 }
 
 
-class MoneyCard extends StatelessWidget {
+class MoneyCardWidget extends StatelessWidget {
   final double amount;
 
-  const MoneyCard({super.key, required this.amount});
+  const MoneyCardWidget({super.key, required this.amount});
 
   @override
   Widget build(BuildContext context) {
@@ -241,8 +217,8 @@ class MoneyCard extends StatelessWidget {
   }
 }
 
-class AddExpensesButton extends StatelessWidget {
-  const AddExpensesButton({super.key});
+class AddMoneyButton extends StatelessWidget {
+  const AddMoneyButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -280,8 +256,8 @@ class AddExpensesButton extends StatelessWidget {
   }
 }
 
-class ViewAllButton extends StatelessWidget {
-  const ViewAllButton({super.key});
+class TransactionsWidget extends StatelessWidget {
+  const TransactionsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -441,4 +417,3 @@ class ViewAllButton extends StatelessWidget {
 //     );
 //   }
 // }
-
