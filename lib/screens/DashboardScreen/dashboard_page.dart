@@ -56,10 +56,55 @@ class DashboardPage extends StatelessWidget {
               const TransactionsWidget(),
               const SizedBox(height: 10.0),
               if (expenseData != null) ...[
-                Text('Amount: ${expenseData!['amount']}'),
-                Text('Tag: ${expenseData!['tag']}'),
-                Text('Title: ${expenseData!['title']}'),
-                Text('Description: ${expenseData!['description']}'),
+                Container(
+                  padding: const EdgeInsets.all(15.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 8.0),
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFD5D0CA),
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        tagIcons[expenseData!['tag']] ?? Icons.error,
+                        size: 30,
+                      ),
+                      const SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${expenseData!['title']}',
+                            style: const TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                          Text(
+                            'Money Deducted: ${expenseData!['amount']}',
+                            style: const TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          Text(
+                            'Description: ${expenseData!['description']}',
+                            style: const TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ],
           ),
@@ -71,6 +116,22 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
+final Map<String, IconData> tagIcons = {
+  'Housing': Icons.home,
+  'Transportation': Icons.directions_car,
+  'Food and Grocery': Icons.local_grocery_store,
+  'Health and Wellness': Icons.favorite,
+  'Debt Payment': Icons.account_balance,
+  'Entertainment': Icons.local_movies,
+  'Clothing and Personal Care': Icons.shopping_bag,
+  'Education': Icons.school,
+  'Savings and Investments': Icons.attach_money,
+  'Utilities': Icons.lightbulb_outline,
+  'Insurance': Icons.verified_user,
+  'Gifts and Donations': Icons.card_giftcard,
+  'Travel and Vacation': Icons.airplanemode_active,
+  'Miscellaneous': Icons.apps,
+};
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({super.key});
