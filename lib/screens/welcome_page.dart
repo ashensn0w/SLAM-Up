@@ -3,14 +3,14 @@ import 'package:slam_up/screens/signin_page.dart';
 import 'dart:async';
 import '../utils/constants.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class SLAMUPLogo extends StatefulWidget {
+  const SLAMUPLogo({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SLAMUPLogo> createState() => _SLAMUPLogoState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SLAMUPLogoState extends State<SLAMUPLogo> {
   @override
   void initState() {
     super.initState();
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 2),
       () => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
+          builder: (context) => const SigninPage(),
         ),
       ),
     );
