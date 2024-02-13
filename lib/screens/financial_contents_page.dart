@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:slam_up/utils/constants.dart';
-import 'package:slam_up/utils/sizes.dart';
-import 'package:slam_up/utils/text.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:slam_up/screens/notification_page.dart';
+import '../screens/DashboardScreen/dashboard_page.dart';
+import '../screens/summary_page.dart';
+import '../screens/profile_page.dart';
 
 class FinancialContents extends StatefulWidget {
   const FinancialContents({super.key});
@@ -116,7 +117,7 @@ class _FinancialContentsState extends State<FinancialContents> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Visibility(
@@ -164,7 +165,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                       final controller = entry.value;
                       return Column(
                         children: [
-                          Container(
+                          SizedBox(
                             height: 250.0,
                             child: YoutubePlayer(
                               controller: controller,
@@ -173,7 +174,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                           ),
                           // Add a space between videos except for the last one
                           if (index != _controllers.length - 1)
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                         ],
                       );
                     }).toList(),
@@ -184,6 +185,7 @@ class _FinancialContentsState extends State<FinancialContents> {
           ),
         ],
       ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 
@@ -200,6 +202,76 @@ class _FinancialContentsState extends State<FinancialContents> {
     setState(() {
       selectedTab = tabName;
     });
+  }
+}
+
+class CustomBottomNavigationBar extends StatelessWidget {
+  const CustomBottomNavigationBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      decoration: BoxDecoration(
+        color: navBarBg,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 5,
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          IconButton(
+            icon: Image.asset(
+              dashboardUnselected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DashboardPage()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Image.asset(
+              summaryUnselected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SummaryPage()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Image.asset(
+              financialContentsSelected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FinancialContents()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Image.asset(
+              profileUnselected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage(fullname: "Name", email: "example@gmail.com", birthdate: "2024-02-17", sex: 'Sex',)),
+              );
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -220,20 +292,20 @@ class TabText extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         decoration: BoxDecoration(
           border: isSelected
-              ? Border(
-                  bottom: BorderSide(
-                    color: navBarBg,
-                    width: 4.0,
-                  ),
-                )
+              ? const Border(
+            bottom: BorderSide(
+              color: navBarBg,
+              width: 4.0,
+            ),
+          )
               : null,
         ),
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Poppins',
             color: darkText,
             fontSize: 20.0,
