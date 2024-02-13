@@ -3,6 +3,8 @@ import 'package:pie_chart/pie_chart.dart';
 import '../utils/constants.dart';
 import 'notification_page.dart';
 import 'package:flutter/services.dart';
+import 'summary_page.dart';
+import 'summary_page2.dart';
 
 class AllocationEntry {
   final String category;
@@ -26,6 +28,8 @@ class _SummaryPage3State extends State<SummaryPage3> {
   List<AllocationEntry> entries = [];
   double budgetAmount = 0.0;
   List<String> calculatedAmounts = [];
+
+  int _currentPageIndex = 2; // Set initial index to 1 for SummaryPage2
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +66,21 @@ class _SummaryPage3State extends State<SummaryPage3> {
       ),
       body: Column(
         children: [
-          Center(
-            child: BudgetAllocation(),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 16.0),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildButton(
+                      context, "Monthly\nExpenses", SummaryPage(), _currentPageIndex == 0),
+                  _buildButton(
+                      context, "Future Forecast\nSpending", SummaryPage2(), _currentPageIndex == 1),
+                  _buildButton(
+                      context, "Budget\nAllocation", SummaryPage3(), _currentPageIndex == 2),
+                ],
+              ),
+            ),
           ),
           SizedBox(height: 20),
           Container(
@@ -139,7 +156,7 @@ class _SummaryPage3State extends State<SummaryPage3> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height:20.0),
+                SizedBox(height: 20.0),
                 Padding(
                   padding: const EdgeInsets.only(left: 50.0),
                   child: ListView.builder(
@@ -159,6 +176,53 @@ class _SummaryPage3State extends State<SummaryPage3> {
               ],
             ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildButton(BuildContext context, String text, Widget destination,
+      bool isActive) {
+    Color backgroundColor = isActive ? Colors.white : Color.fromRGBO(164, 199, 201, 1.0);
+    Color textColor = isActive ? Color.fromRGBO(47, 44, 44, 1.0) : Color.fromRGBO(47, 44, 44, 1.0);
+
+    return ElevatedButton(
+      onPressed: isActive ? null : () {
+        setState(() {
+          if (destination is SummaryPage) {
+            _currentPageIndex = 0;
+          } else if (destination is SummaryPage2) {
+            _currentPageIndex = 1;
+          } else if (destination is SummaryPage3) {
+            _currentPageIndex = 2;
+          }
+        });
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => destination),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.all(5.0),
+        primary: backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+      ),
+      child: Container(
+        width: 120,
+        height: 60,
+        child: Center(
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: textColor,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              fontSize: 12.0,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -227,33 +291,6 @@ class _SummaryPage3State extends State<SummaryPage3> {
     setState(() {
       // Update the UI when calculated amounts are available
     });
-  }
-}
-
-class BudgetAllocation extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5.0),
-      width: 270,
-      height: 40,
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(15.0),
-        color: Color.fromRGBO(164, 199, 201, 1.0),
-      ),
-      child: Center(
-        child: Text(
-          'Budget Allocation',
-          style: TextStyle(
-            color: Color.fromRGBO(47, 44, 44, 1.0),
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0,
-          ),
-        ),
-      ),
-    );
   }
 }
 
