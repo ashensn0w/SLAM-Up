@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../utils/constants.dart';
 import 'notification_page.dart';
+import 'summary_page.dart';
+import 'summary_page3.dart';
 
-class SummaryPage2 extends StatelessWidget {
+class SummaryPage2 extends StatefulWidget {
+  @override
+  _SummaryPage2State createState() => _SummaryPage2State();
+}
+
+class _SummaryPage2State extends State<SummaryPage2> {
+  int _currentPageIndex = 1; // Set initial index to 1 for SummaryPage2
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,14 +49,69 @@ class SummaryPage2 extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(vertical: 16.0),
             child: Center(
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  StackedColumnChart(),
+                  _buildButton(
+                      context, "Monthly\nExpenses", SummaryPage(), _currentPageIndex == 0),
+                  _buildButton(
+                      context, "Future Forecast\nSpending", SummaryPage2(), _currentPageIndex == 1),
+                  _buildButton(
+                      context, "Budget\nAllocation", SummaryPage3(), _currentPageIndex == 2),
                 ],
               ),
             ),
           ),
+          SizedBox(height: 2),
+          StackedColumnChart(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildButton(BuildContext context, String text, Widget destination,
+      bool isActive) {
+    Color backgroundColor = isActive ? Colors.white : Color.fromRGBO(164, 199, 201, 1.0);
+    Color textColor = isActive ? Color.fromRGBO(47, 44, 44, 1.0) : Color.fromRGBO(47, 44, 44, 1.0);
+
+    return ElevatedButton(
+      onPressed: isActive ? null : () {
+        setState(() {
+          if (destination is SummaryPage) {
+            _currentPageIndex = 0;
+          } else if (destination is SummaryPage2) {
+            _currentPageIndex = 1;
+          } else if (destination is SummaryPage3) {
+            _currentPageIndex = 2;
+          }
+        });
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => destination),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.all(5.0),
+        primary: backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+      ),
+      child: Container(
+        width: 120,
+        height: 60,
+        child: Center(
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: textColor,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              fontSize: 12.0,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -114,7 +178,6 @@ class StackedColumnChart extends StatelessWidget {
     );
   }
 }
-
 
 class ExpensesData {
   ExpensesData({required this.month, required this.food, required this.transpo, required this.bills, required this.school});

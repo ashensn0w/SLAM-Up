@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 import '../utils/constants.dart';
 import 'notification_page.dart';
+import 'summary_page2.dart';
+import 'summary_page3.dart';
 
-class SummaryPage extends StatelessWidget {
+class SummaryPage extends StatefulWidget {
+  @override
+  _SummaryPageState createState() => _SummaryPageState();
+}
+
+class _SummaryPageState extends State<SummaryPage> {
   Map<String, double> dataMap = {
     "Transportation": 5000,
     "Food": 3500,
@@ -11,9 +18,12 @@ class SummaryPage extends StatelessWidget {
     // Add more data if needed
   };
 
+  int _currentPageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    double totalExpenses = dataMap.values.reduce((value, element) => value + element);
+    double totalExpenses = dataMap.values.reduce((value, element) =>
+    value + element);
     return Scaffold(
       backgroundColor: primLightBg,
       appBar: AppBar(
@@ -50,34 +60,48 @@ class SummaryPage extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(vertical: 16.0),
                 child: Center(
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Expenses(),
-                      SizedBox(height: 40),
-                      Text(
-                        'Total Expenses: ${totalExpenses.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          color: Colors.black,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      _buildButton(context, "Monthly\nExpenses", SummaryPage(),
+                          _currentPageIndex == 0),
+                      _buildButton(
+                          context, "Future Forecast\nSpending", SummaryPage2(),
+                          _currentPageIndex == 1),
+                      _buildButton(
+                          context, "Budget\nAllocation", SummaryPage3(),
+                          _currentPageIndex == 2),
                     ],
                   ),
                 ),
               ),
+              SizedBox(height: 10),
+              Text(
+                'Total Expenses: ${totalExpenses.toStringAsFixed(2)}',
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  color: darkText,
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               Container(
-                height: MediaQuery.of(context).size.width / 1.2,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .width / 1.2,
                 child: Center(
                   child: Stack(
                     alignment: Alignment.centerRight,
                     children: [
                       PieChart(
                         dataMap: dataMap,
-                        animationDuration: Duration(milliseconds: 800),
+                        animationDuration: Duration(milliseconds: 2000),
                         chartLegendSpacing: 16,
-                        chartRadius: MediaQuery.of(context).size.width / 2.0,
+                        chartRadius: MediaQuery
+                            .of(context)
+                            .size
+                            .width / 2.3,
                         colorList: [
                           Colors.blue,
                           Colors.green,
@@ -85,7 +109,7 @@ class SummaryPage extends StatelessWidget {
                         ],
                         initialAngleInDegree: 0,
                         chartType: ChartType.ring,
-                        ringStrokeWidth: 80,
+                        ringStrokeWidth: 50,
                         centerText: "Expenses",
                         legendOptions: LegendOptions(
                           showLegendsInRow: false,
@@ -105,18 +129,8 @@ class SummaryPage extends StatelessWidget {
                           chartValueBackgroundColor: Colors.transparent,
                           chartValueStyle: TextStyle(
                             color: Colors.black,
-                            fontSize: 16.5,
+                            fontSize: 13.5,
                           ),
-                        ),
-                      ),
-                      Positioned(
-                        right: 16,
-                        child: IconButton(
-                          icon: Icon(Icons.arrow_forward),
-                          onPressed: () {
-                            // Navigate to other screens
-                            // Use Navigator.push or Navigator.pushReplacement based on your requirement
-                          },
                         ),
                       ),
                     ],
@@ -126,7 +140,7 @@ class SummaryPage extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: Container(
-                    margin: EdgeInsets.all(16.0),
+                    margin: EdgeInsets.all(10.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: dataMap.entries.map((entry) {
@@ -148,7 +162,7 @@ class SummaryPage extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   color: Colors.black,
-                                  fontSize: 16.0,
+                                  fontSize: 13.0,
                                 ),
                               ),
                             ],
@@ -178,28 +192,48 @@ class SummaryPage extends StatelessWidget {
         return Colors.grey;
     }
   }
-}
 
-class Expenses extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5.0),
-      width: 270,
-      height: 40,
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(15.0),
-        color: Color.fromRGBO(164, 199, 201, 1.0),
+  Widget _buildButton(BuildContext context, String text, Widget destination,
+      bool isActive) {
+    Color backgroundColor = isActive ?Colors.white : Color.fromRGBO(164, 199, 201, 1.0);
+    Color textColor = isActive ? Color.fromRGBO(47, 44, 44, 1.0) : Color.fromRGBO(47, 44, 44, 1.0);
+
+    return ElevatedButton(
+      onPressed: isActive ? null : () {
+        setState(() {
+          if (destination is SummaryPage) {
+            _currentPageIndex = 0;
+          } else if (destination is SummaryPage2) {
+            _currentPageIndex = 1;
+          } else if (destination is SummaryPage3) {
+            _currentPageIndex = 2;
+          }
+        });
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => destination),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.all(5.0),
+        primary: backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
       ),
-      child: Center(
-        child: Text(
-          'Monthly Expenses',
-          style: TextStyle(
-            color: Color.fromRGBO(47, 44, 44, 1.0),
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0,
+      child: Container(
+        width: 120,
+        height: 60,
+        child: Center(
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: textColor,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              fontSize: 12.0,
+            ),
           ),
         ),
       ),
