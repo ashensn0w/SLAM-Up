@@ -12,9 +12,9 @@ class SigninPage extends StatefulWidget {
 
 class _SigninPageState extends State<SigninPage> {
   bool _isPasswordHidden = true;
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +77,8 @@ class _SigninPageState extends State<SigninPage> {
                         ),
                         const SizedBox(height: 10),
                         TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: _emailController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18),
@@ -112,6 +114,8 @@ class _SigninPageState extends State<SigninPage> {
                     ),
                     const SizedBox(height: 5),
                     TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _passwordController,
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
                           icon: Icon(
