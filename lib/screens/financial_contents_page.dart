@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:slam_up/utils/constants.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:slam_up/screens/notification_page.dart';
-import '../screens/DashboardScreen/dashboard_page.dart';
-import '../screens/summary_page.dart';
-import '../screens/profile_page.dart';
 
 class FinancialContents extends StatefulWidget {
-  const FinancialContents({super.key});
+  const FinancialContents({Key? key}) : super(key: key);
 
   @override
   State<FinancialContents> createState() => _FinancialContentsState();
@@ -63,14 +59,14 @@ class _FinancialContentsState extends State<FinancialContents> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primLightBg,
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           AppBar(
             title: const Text(
-              'Financial  Content',
+              'Financial Content',
               style: TextStyle(
-                color: darkText,
+                color: Colors.black,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
                 fontSize: 26.0,
@@ -81,9 +77,7 @@ class _FinancialContentsState extends State<FinancialContents> {
             elevation: 0,
             actions: [
               IconButton(
-                icon: Image.asset(
-                  notifButton,
-                ),
+                icon: const Icon(Icons.notifications),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -124,7 +118,7 @@ class _FinancialContentsState extends State<FinancialContents> {
             visible: selectedTab == 'Articles',
             child: Container(
               height: 100.0,
-              color: navBarBg,
+              color: Colors.green,
               child: const Center(
                 child: Text(
                   'Container in Articles Tab',
@@ -144,7 +138,7 @@ class _FinancialContentsState extends State<FinancialContents> {
               color: Colors.black,
               child: const Center(
                 child: Text(
-                  'clips Tab',
+                  'Clips Tab',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -154,31 +148,29 @@ class _FinancialContentsState extends State<FinancialContents> {
               ),
             ),
           ),
-          Expanded(
-            child: Visibility(
-              visible: selectedTab == 'Videos',
-              child: Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: _controllers.asMap().entries.map((entry) {
-                      final index = entry.key;
-                      final controller = entry.value;
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 250.0,
-                            child: YoutubePlayer(
-                              controller: controller,
-                              showVideoProgressIndicator: true,
-                            ),
+          Visibility(
+            visible: selectedTab == 'Videos',
+            child: Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: _controllers.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final controller = entry.value;
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 250.0,
+                          child: YoutubePlayer(
+                            controller: controller,
+                            showVideoProgressIndicator: true,
                           ),
-                          // Add a space between videos except for the last one
-                          if (index != _controllers.length - 1)
-                            const SizedBox(height: 20),
-                        ],
-                      );
-                    }).toList(),
-                  ),
+                        ),
+                        // Add a space between videos except for the last one
+                        if (index != _controllers.length - 1)
+                          const SizedBox(height: 20),
+                      ],
+                    );
+                  }).toList(),
                 ),
               ),
             ),
@@ -198,7 +190,6 @@ class _FinancialContentsState extends State<FinancialContents> {
   }
 
   void handleTabClick(String tabName) {
-    // Handle the tab click based on the tabName
     setState(() {
       selectedTab = tabName;
     });
@@ -206,14 +197,14 @@ class _FinancialContentsState extends State<FinancialContents> {
 }
 
 class CustomBottomNavigationBar extends StatelessWidget {
-  const CustomBottomNavigationBar({super.key});
+  const CustomBottomNavigationBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 80,
       decoration: BoxDecoration(
-        color: navBarBg,
+        color: Colors.blueGrey,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
@@ -226,20 +217,16 @@ class CustomBottomNavigationBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
-            icon: Image.asset(
-              dashboardUnselected,
-            ),
+            icon: const Icon(Icons.dashboard),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const DashboardPage()),
+                MaterialPageRoute(builder: (context) => DashboardPage()),
               );
             },
           ),
           IconButton(
-            icon: Image.asset(
-              summaryUnselected,
-            ),
+            icon: const Icon(Icons.summary),
             onPressed: () {
               Navigator.push(
                 context,
@@ -248,24 +235,20 @@ class CustomBottomNavigationBar extends StatelessWidget {
             },
           ),
           IconButton(
-            icon: Image.asset(
-              financialContentsSelected,
-            ),
+            icon: const Icon(Icons.money),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const FinancialContents()),
+                MaterialPageRoute(builder: (context) => FinancialContents()),
               );
             },
           ),
           IconButton(
-            icon: Image.asset(
-              profileUnselected,
-            ),
+            icon: const Icon(Icons.person),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfilePage(fullname: "Name", email: "example@gmail.com", birthdate: "2024-02-17", sex: 'Sex',)),
+                MaterialPageRoute(builder: (context) => ProfilePage()),
               );
             },
           ),
@@ -296,18 +279,18 @@ class TabText extends StatelessWidget {
         decoration: BoxDecoration(
           border: isSelected
               ? const Border(
-            bottom: BorderSide(
-              color: navBarBg,
-              width: 4.0,
-            ),
-          )
+                  bottom: BorderSide(
+                    color: Colors.blue,
+                    width: 4.0,
+                  ),
+                )
               : null,
         ),
         child: Text(
           text,
           style: const TextStyle(
             fontFamily: 'Poppins',
-            color: darkText,
+            color: Colors.black,
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
