@@ -38,7 +38,7 @@ class ProfilePage extends StatelessWidget {
           SizedBox(
             height: 350,
             child: ColoredBox(
-              color: profileDarkBg,
+              color: navBarBg,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -74,7 +74,7 @@ class ProfilePage extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff153836),
+                        backgroundColor: profileDarkBg,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -354,10 +354,10 @@ class _EditProfileState extends State<EditProfile> {
       body: Column(children: [
         //container ------------------------------
         SizedBox(
-          height: 270,
-          width: 400,
+          height: 300,
+          width: 420,
           child: ColoredBox(
-            color: const Color(0xFF43817F),
+            color: navBarBg,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -386,7 +386,7 @@ class _EditProfileState extends State<EditProfile> {
                   child: ElevatedButton(
                     onPressed: () => pickImage(),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff153836),
+                      backgroundColor: profileDarkBg,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -408,7 +408,7 @@ class _EditProfileState extends State<EditProfile> {
           ),
         ),
 
-        const SizedBox(height: 20),
+        const SizedBox(height: 30),
 
         //container for all the details in the body ------------------------------
         SizedBox(
@@ -483,7 +483,6 @@ class _EditProfileState extends State<EditProfile> {
                   TextField(
                     controller: _birthdateController,
                     decoration: InputDecoration(
-                        labelText: 'Select Date',
                         filled: true,
                         suffixIcon: const Icon(Icons.calendar_today),
                         enabledBorder: OutlineInputBorder(
