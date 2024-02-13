@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:slam_up/utils/sizes.dart';
+import 'package:url_launcher/link.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:slam_up/screens/notification_page.dart';
 import '../screens/DashboardScreen/dashboard_page.dart';
@@ -15,6 +17,8 @@ class FinancialContents extends StatefulWidget {
 
 class _FinancialContentsState extends State<FinancialContents> {
   String selectedTab = 'Articles';
+  final sampleImage =
+      'https://usalg.org/wp-content/uploads/2021/01/Budgeting-1.jpg';
 
   late List<YoutubePlayerController> _controllers;
 
@@ -87,7 +91,8 @@ class _FinancialContentsState extends State<FinancialContents> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => NotificationsPage()),
+                    MaterialPageRoute(
+                        builder: (context) => NotificationsPage()),
                   );
                 },
               ),
@@ -121,17 +126,124 @@ class _FinancialContentsState extends State<FinancialContents> {
           ),
           Visibility(
             visible: selectedTab == 'Articles',
-            child: Container(
-              height: 100.0,
-              color: Colors.green,
-              child: const Center(
-                child: Text(
-                  'Container in Articles Tab',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+            child: Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        color: navBarBg,
+                        borderRadius: BorderRadius.circular(7.0),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Container 2',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20.0),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: contentsBg,
+                        borderRadius: BorderRadius.circular(7.0),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Padding(padding: EdgeInsets.only(left: 10)),
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(sampleImage),
+                              radius: 50,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Link(
+                                target: LinkTarget.blank,
+                                uri: Uri.parse(
+                                    'https://www.ramseysolutions.com/budgeting/the-truth-about-budgeting'), // Replace with your desired URL
+                                builder: (context, followLink) => TextButton(
+                                  child: Text(
+                                    'Esophagus Esophagus habang tayoy kumain',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: lightText,
+                                      fontSize: fontSizes.fontsizeSm,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  onPressed: followLink,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20.0),
+                    Container(
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        color: navBarBg,
+                        borderRadius: BorderRadius.circular(7.0),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Container 2',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20.0),
+                    Container(
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        color: navBarBg,
+                        borderRadius: BorderRadius.circular(7.0),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Container 2',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20.0),
+                    Container(
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        color: navBarBg,
+                        borderRadius: BorderRadius.circular(7.0),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Container 2',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -250,7 +362,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const FinancialContents()),
+                MaterialPageRoute(
+                    builder: (context) => const FinancialContents()),
               );
             },
           ),
@@ -261,7 +374,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfilePage(fullname: "Name", email: "example@gmail.com", birthdate: "2024-02-17", sex: 'Sex',)),
+                MaterialPageRoute(
+                    builder: (context) => ProfilePage(
+                          fullname: "Name",
+                          email: "example@gmail.com",
+                          birthdate: "2024-02-17",
+                          sex: 'Sex',
+                        )),
               );
             },
           ),
@@ -293,7 +412,7 @@ class TabText extends StatelessWidget {
           border: isSelected
               ? const Border(
                   bottom: BorderSide(
-                    color: Colors.blue,
+                    color: navBarBg,
                     width: 4.0,
                   ),
                 )
