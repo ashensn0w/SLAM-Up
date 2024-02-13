@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slam_up/utils/constants.dart';
 import 'package:slam_up/utils/sizes.dart';
 import 'package:slam_up/utils/text.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class FinancialContents extends StatefulWidget {
   const FinancialContents({super.key});
@@ -65,11 +66,28 @@ class _FinancialContentsState extends State<FinancialContents> {
           Visibility(
             visible: selectedTab == 'Articles',
             child: Container(
-              height: 100.0, // Set the desired height
-              color: Colors.green, // Change the color as needed
+              height: 100.0,
+              color: Colors.green,
               child: const Center(
                 child: Text(
                   'Container in Articles Tab',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Visibility(
+            visible: selectedTab == 'Clips',
+            child: Container(
+              height: 100.0, // Set the desired height
+              color: Colors.black, // Change the color as needed
+              child: const Center(
+                child: Text(
+                  'clips Tab',
                   style: TextStyle(
                     color: Colors.white, // Change the text color as needed
                     fontSize: 18.0,
@@ -79,10 +97,21 @@ class _FinancialContentsState extends State<FinancialContents> {
               ),
             ),
           ),
-          Expanded(
+          Visibility(
+            visible: selectedTab == 'Videos',
             child: Container(
-                // Your other content goes here
+              height: 250.0,
+              child: YoutubePlayer(
+                controller: YoutubePlayerController(
+                  initialVideoId: '2JgvVfOfoWI',
+                  flags: const YoutubePlayerFlags(
+                    autoPlay: true,
+                    mute: false,
+                  ),
                 ),
+                showVideoProgressIndicator: true,
+              ),
+            ),
           ),
         ],
       ),
@@ -113,13 +142,27 @@ class TabText extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontFamily: 'Poppins',
-          color: darkText, // Change the text color as needed
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold,
+      child: Container(
+        padding:
+            EdgeInsets.symmetric(vertical: 8.0), // Adjust padding as needed
+        decoration: BoxDecoration(
+          border: isSelected
+              ? Border(
+                  bottom: BorderSide(
+                    color: navBarBg, // Change the underline color as needed
+                    width: 4.0, // Change the underline width as needed
+                  ),
+                )
+              : null,
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            color: darkText, // Change the text color as needed
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
