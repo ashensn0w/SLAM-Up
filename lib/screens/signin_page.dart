@@ -13,6 +13,9 @@ class SigninPage extends StatefulWidget {
 class _SigninPageState extends State<SigninPage> {
   bool _isPasswordHidden = true;
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,131 +58,147 @@ class _SigninPageState extends State<SigninPage> {
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 20, top: 400),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Text(
-                        'Email',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: fontSizes.fontsizeSm,
-                          fontWeight: FontWeight.w500,
-                          color: darkText,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(18),
-                            borderSide:
-                            const BorderSide(color: Colors.black, width: 2.0),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 15),
-                          filled: false,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        'Password',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: fontSizes.fontsizeSm,
-                          fontWeight: FontWeight.w500,
-                          color: darkText,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _isPasswordHidden = !_isPasswordHidden;
-                          });
-                        },
-                        child: Image.asset(
-                          _isPasswordHidden
-                              ? hidePassButton
-                              : hidePassButton,
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18),
-                        borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                      ),
-                      contentPadding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                      filled: false,
-                    ),
-                    obscureText: _isPasswordHidden,
-                  ),
-                  const SizedBox(height: 30),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      backgroundColor: navBarBg,
-                      minimumSize: const Size(450, 45),
-                    ),
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: fontSizes.fontsizeSm,
-                        fontWeight: FontWeight.w500,
-                        color: lighterText,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 60),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         const Text(
-                          "Don't have any account?",
+                          'Email',
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            color: darkText,
                             fontSize: fontSizes.fontsizeSm,
+                            fontWeight: FontWeight.w500,
+                            color: darkText,
                           ),
                         ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.push(context,
-                                MaterialPageRoute(
-                                    builder: (context) => const SignupPage()),
-                              );
-                            },
-                            child: const Text(
-                              'Sign Up',
-                              style: TextStyle(
-                                color: darkText,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.bold,
-                                fontSize: fontSizes.fontsizeSm,
-                              ),
-                            )
-                        )
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              borderSide: const BorderSide(color: Colors.black, width: 2.0),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 15),
+                            filled: false,
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter an email';
+                            }
+                            return null;
+                          },
+                        ),
                       ],
                     ),
-                  )
-                ],
+                    const SizedBox(height: 10),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          'Password',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: fontSizes.fontsizeSm,
+                            fontWeight: FontWeight.w500,
+                            color: darkText,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordHidden ? Icons.visibility : Icons.visibility_off,
+                            color: Colors.grey,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordHidden = !_isPasswordHidden;
+                            });
+                          },
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18),
+                          borderSide: const BorderSide(color: Colors.black, width: 2.0),
+                        ),
+                        contentPadding:
+                        const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                        filled: false,
+                      ),
+                      obscureText: _isPasswordHidden,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a password';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 30),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        backgroundColor: navBarBg,
+                        minimumSize: const Size(450, 45),
+                      ),
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: fontSizes.fontsizeSm,
+                          fontWeight: FontWeight.w500,
+                          color: lighterText,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 60),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Don't have any account?",
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              color: darkText,
+                              fontSize: fontSizes.fontsizeSm,
+                            ),
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const SignupPage()),
+                                );
+                              },
+                              child: const Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  color: darkText,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: fontSizes.fontsizeSm,
+                                ),
+                              )
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
