@@ -3,6 +3,7 @@ import 'package:slam_up/utils/constants.dart';
 import 'package:slam_up/utils/sizes.dart';
 import 'package:slam_up/utils/text.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:slam_up/screens/notification_page.dart';
 
 class FinancialContents extends StatefulWidget {
   const FinancialContents({super.key});
@@ -14,31 +15,83 @@ class FinancialContents extends StatefulWidget {
 class _FinancialContentsState extends State<FinancialContents> {
   String selectedTab = 'Articles';
 
+  late List<YoutubePlayerController> _controllers;
+
+  @override
+  void initState() {
+    super.initState();
+    _controllers = [
+      YoutubePlayerController(
+        initialVideoId: 'sVKQn2I4HDM',
+        flags: const YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+        ),
+      ),
+      YoutubePlayerController(
+        initialVideoId: 'Lh-R5WrFd4E',
+        flags: const YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+        ),
+      ),
+      YoutubePlayerController(
+        initialVideoId: 'xEPHsUtLFDA',
+        flags: const YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+        ),
+      ),
+      YoutubePlayerController(
+        initialVideoId: 'oBi5HkqmAAQ',
+        flags: const YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+        ),
+      ),
+      YoutubePlayerController(
+        initialVideoId: 'tCWD__q3kgs',
+        flags: const YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+        ),
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primLightBg,
       body: Column(
         children: [
-          Container(
-            margin: const EdgeInsets.only(top: 20.0),
-            height: 60.0,
-            width: 260,
-            decoration: const BoxDecoration(
-                color: finContentBg, // Change the color as needed
-                borderRadius: BorderRadius.all(Radius.circular(120.0))),
-            child: const Align(
-              alignment: Alignment.center,
-              child: Text(
-                'Financial Content',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  color: darkText, // Change the text color as needed
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                ),
+          AppBar(
+            title: const Text(
+              'Financial  Content',
+              style: TextStyle(
+                color: darkText,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                fontSize: 26.0,
               ),
             ),
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            actions: [
+              IconButton(
+                icon: Image.asset(
+                  notifButton,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NotificationsPage()),
+                  );
+                },
+              ),
+            ],
           ),
           const SizedBox(
             height: 13.0,
@@ -63,11 +116,14 @@ class _FinancialContentsState extends State<FinancialContents> {
               ),
             ],
           ),
+          SizedBox(
+            height: 10,
+          ),
           Visibility(
             visible: selectedTab == 'Articles',
             child: Container(
               height: 100.0,
-              color: Colors.green,
+              color: navBarBg,
               child: const Center(
                 child: Text(
                   'Container in Articles Tab',
@@ -83,13 +139,13 @@ class _FinancialContentsState extends State<FinancialContents> {
           Visibility(
             visible: selectedTab == 'Clips',
             child: Container(
-              height: 100.0, // Set the desired height
-              color: Colors.black, // Change the color as needed
+              height: 100.0,
+              color: Colors.black,
               child: const Center(
                 child: Text(
                   'clips Tab',
                   style: TextStyle(
-                    color: Colors.white, // Change the text color as needed
+                    color: Colors.white,
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -97,25 +153,46 @@ class _FinancialContentsState extends State<FinancialContents> {
               ),
             ),
           ),
-          Visibility(
-            visible: selectedTab == 'Videos',
-            child: Container(
-              height: 250.0,
-              child: YoutubePlayer(
-                controller: YoutubePlayerController(
-                  initialVideoId: '2JgvVfOfoWI',
-                  flags: const YoutubePlayerFlags(
-                    autoPlay: true,
-                    mute: false,
+          Expanded(
+            child: Visibility(
+              visible: selectedTab == 'Videos',
+              child: Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: _controllers.asMap().entries.map((entry) {
+                      final index = entry.key;
+                      final controller = entry.value;
+                      return Column(
+                        children: [
+                          Container(
+                            height: 250.0,
+                            child: YoutubePlayer(
+                              controller: controller,
+                              showVideoProgressIndicator: true,
+                            ),
+                          ),
+                          // Add a space between videos except for the last one
+                          if (index != _controllers.length - 1)
+                            SizedBox(height: 20),
+                        ],
+                      );
+                    }).toList(),
                   ),
                 ),
-                showVideoProgressIndicator: true,
               ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
+    super.dispose();
   }
 
   void handleTabClick(String tabName) {
@@ -143,14 +220,13 @@ class TabText extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding:
-            EdgeInsets.symmetric(vertical: 8.0), // Adjust padding as needed
+        padding: EdgeInsets.symmetric(vertical: 8.0),
         decoration: BoxDecoration(
           border: isSelected
               ? Border(
                   bottom: BorderSide(
-                    color: navBarBg, // Change the underline color as needed
-                    width: 4.0, // Change the underline width as needed
+                    color: navBarBg,
+                    width: 4.0,
                   ),
                 )
               : null,
@@ -159,7 +235,7 @@ class TabText extends StatelessWidget {
           text,
           style: TextStyle(
             fontFamily: 'Poppins',
-            color: darkText, // Change the text color as needed
+            color: darkText,
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
