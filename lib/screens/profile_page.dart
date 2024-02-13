@@ -287,16 +287,13 @@ class _EditProfileState extends State<EditProfile> {
 
   //method for getting image from gallery ------------------------------
   Future pickImage() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
+    final returnedImage =
+    await ImagePicker().pickImage(source: ImageSource.gallery);
 
-      final imageTemporary = File(image.path);
-      setState(() => this.image = imageTemporary);
-    } on PlatformException catch (e) {
-      // ignore: avoid_print
-      print('Failed to pick image: $e');
-    }
+    if (returnedImage == null) return;
+    setState(() {
+      image = File(returnedImage.path);
+    });
   }
 
   //text editing controller for fullname,email,and birthdate ------------------------------
