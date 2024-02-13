@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:slam_up/utils/text.dart';
 import 'package:slam_up/utils/constants.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,6 +10,7 @@ class ProfilePage extends StatelessWidget {
   ProfilePage({
     Key? key,
     // required keys to display the default
+    this.image,
     required this.fullname,
     required this.email,
     required this.birthdate,
@@ -18,7 +18,7 @@ class ProfilePage extends StatelessWidget {
   }) : super(key: key);
 
   //get the image from 'change picture button' in edit profile page
-  get image => null;
+  final File? image;
 
   //declared to handle dynamic values from edit profile 'update button'
   String fullname;
@@ -288,12 +288,13 @@ class _EditProfileState extends State<EditProfile> {
   //method for getting image from gallery ------------------------------
   Future pickImage() async {
     final returnedImage =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (returnedImage == null) return;
     setState(() {
       image = File(returnedImage.path);
     });
+
   }
 
   //text editing controller for fullname,email,and birthdate ------------------------------
@@ -370,18 +371,20 @@ class _EditProfileState extends State<EditProfile> {
                       )),
                 ),
                 //for getting the image if not null ------------------------------
-                image != null
-                    ? Image.file(image!)
-                    : const CircleAvatar(
-                        radius: 55,
-                        backgroundColor: Colors.white,
-                      ),
+
+                CircleAvatar(
+                  radius: 55,
+                  backgroundColor: Colors.white,
+                  backgroundImage: image != null ? FileImage(image!) : null,
+                ),
                 const SizedBox(height: 20),
                 // this is the change picture button ------------------------------
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 110),
                   child: ElevatedButton(
-                    onPressed: () => pickImage(),
+                    onPressed: () {
+                      pickImage();
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: profileDarkBg,
                       shape: RoundedRectangleBorder(
