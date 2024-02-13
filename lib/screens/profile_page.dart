@@ -83,6 +83,7 @@ class ProfilePage extends StatelessWidget {
                         padding: EdgeInsets.all(5.0),
                         child: Text(editProfile,
                             style: TextStyle(
+                              color: Colors.white,
                               fontFamily: 'Poppins',
                               fontSize: 18,
                               fontWeight: FontWeight.normal,
@@ -162,7 +163,7 @@ class ProfilePage extends StatelessWidget {
 
           //this is the logout button ------------------------------
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 140, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 130, vertical: 20),
             child: ElevatedButton(
               onPressed: () {
                 /* Navigator.push(
@@ -180,6 +181,7 @@ class ProfilePage extends StatelessWidget {
                 padding: EdgeInsets.all(6.0),
                 child: Text('LOG OUT',
                     style: TextStyle(
+                      color: Colors.white,
                       fontFamily: 'Poppins',
                       fontSize: 18,
                       fontWeight: FontWeight.normal,
@@ -345,6 +347,7 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       /*appBar: AppBar(
         title: Text('Second Page'),
       ),*/
@@ -392,6 +395,7 @@ class _EditProfileState extends State<EditProfile> {
                       padding: EdgeInsets.all(3.0),
                       child: Text(changePicture,
                           style: TextStyle(
+                            color: Colors.white,
                             fontFamily: 'Poppins',
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
@@ -410,135 +414,138 @@ class _EditProfileState extends State<EditProfile> {
         SizedBox(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
-            child: Column(
-              children: [
-                //fullname label ------------------------------
-                const Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Fullname',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,
-                          //backgroundColor: Colors.grey,
-                          fontSize: 16,
-                        )),
-                  ],
-                ),
-                //fullname text field ------------------------------
-                TextField(
-                  controller: _fullnameController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  //fullname label ------------------------------
+                  const Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Fullname',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                            //backgroundColor: Colors.grey,
+                            fontSize: 16,
+                          )),
+                    ],
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                //email label ------------------------------
-                const Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Email',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,
-                          //backgroundColor: Colors.grey,
-                          fontSize: 16,
-                        )),
-                  ],
-                ),
-                //email text field ------------------------------
-                TextField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ), // Optional border
+                  //fullname text field ------------------------------
+                  TextField(
+                    controller: _fullnameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                //birthdate label ------------------------------
-                const Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Birthdate',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,
-                          //backgroundColor: Colors.grey,
-                          fontSize: 16,
-                        )),
-                  ],
-                ),
-                //bithdate date picker calendar ------------------------------
-                TextField(
-                  controller: _birthdateController,
-                  decoration: InputDecoration(
-                      labelText: 'Select Date',
-                      filled: true,
-                      suffixIcon: const Icon(Icons.calendar_today),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: const BorderSide(color: Colors.grey)),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue),
-                      )),
-                  readOnly: true,
-                  onTap: () {
-                    _birthdate();
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                //sex label ------------------------------
-                const Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Sex',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold,
-                          //backgroundColor: Colors.grey,
-                          fontSize: 16,
-                        )),
-                  ],
-                ),
-                //dropdown for sex ------------------------------
-                Center(
-                  child: DropdownButton<String>(
-                    borderRadius: BorderRadius.circular(10.0),
-                    value: sex,
-                    icon: const Icon(Icons.person_sharp),
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.normal,
-                      fontSize: 16,
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //email label ------------------------------
+                  const Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Email',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                            //backgroundColor: Colors.grey,
+                            fontSize: 16,
+                          )),
+                    ],
+                  ),
+                  //email text field ------------------------------
+                  TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ), // Optional border
                     ),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.grey,
-                    ),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        sex = newValue!;
-                      });
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //birthdate label ------------------------------
+                  const Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Birthdate',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                            //backgroundColor: Colors.grey,
+                            fontSize: 16,
+                          )),
+                    ],
+                  ),
+                  //bithdate date picker calendar ------------------------------
+                  TextField(
+                    controller: _birthdateController,
+                    decoration: InputDecoration(
+                        labelText: 'Select Date',
+                        filled: true,
+                        suffixIcon: const Icon(Icons.calendar_today),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide: const BorderSide(color: Colors.grey)),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        )),
+                    readOnly: true,
+                    onTap: () {
+                      _birthdate();
                     },
-                    isExpanded: true,
-                    items: items.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
                   ),
-                ),
-                //------------------------------------------------
-              ],
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //sex label ------------------------------
+                  const Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Sex',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          )),
+                    ],
+                  ),
+                  //dropdown for sex ------------------------------
+                  Center(
+                    child: DropdownButton<String>(
+                      borderRadius: BorderRadius.circular(10.0),
+                      value: sex,
+                      icon: const Icon(Icons.person_sharp),
+                      style: const TextStyle(
+                        fontFamily: 'Poppins',
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16,
+                      ),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.grey,
+                      ),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          sex = newValue!;
+                        });
+                      },
+                      isExpanded: true,
+                      items:
+                          items.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  //------------------------------------------------
+                ],
+              ),
             ),
           ),
         ),
@@ -568,6 +575,7 @@ class _EditProfileState extends State<EditProfile> {
                   padding: EdgeInsets.all(6.0),
                   child: Text(pCancel,
                       style: TextStyle(
+                        color: Colors.white,
                         fontFamily: 'Poppins',
                         fontSize: 18,
                         fontWeight: FontWeight.normal,
@@ -609,6 +617,7 @@ class _EditProfileState extends State<EditProfile> {
                   padding: EdgeInsets.all(6.0),
                   child: Text(pUpdate,
                       style: TextStyle(
+                        color: Colors.white,
                         fontFamily: 'Poppins',
                         fontSize: 18,
                         fontWeight: FontWeight.normal,
