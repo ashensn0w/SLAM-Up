@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:slam_up/screens/notification_page.dart';
+import '../screens/DashboardScreen/dashboard_page.dart';
+import '../screens/summary_page.dart';
+import '../screens/profile_page.dart';
+import 'package:slam_up/utils/constants.dart';
 
 class FinancialContents extends StatefulWidget {
   const FinancialContents({Key? key}) : super(key: key);
@@ -77,12 +81,13 @@ class _FinancialContentsState extends State<FinancialContents> {
             elevation: 0,
             actions: [
               IconButton(
-                icon: const Icon(Icons.notifications),
+                icon: Image.asset(
+                  notifButton,
+                ),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => NotificationsPage()),
+                    MaterialPageRoute(builder: (context) => NotificationsPage()),
                   );
                 },
               ),
@@ -197,14 +202,14 @@ class _FinancialContentsState extends State<FinancialContents> {
 }
 
 class CustomBottomNavigationBar extends StatelessWidget {
-  const CustomBottomNavigationBar({Key? key}) : super(key: key);
+  const CustomBottomNavigationBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 80,
       decoration: BoxDecoration(
-        color: Colors.blueGrey,
+        color: navBarBg,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
@@ -217,16 +222,20 @@ class CustomBottomNavigationBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
-            icon: const Icon(Icons.dashboard),
+            icon: Image.asset(
+              dashboardUnselected,
+            ),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DashboardPage()),
+                MaterialPageRoute(builder: (context) => const DashboardPage()),
               );
             },
           ),
           IconButton(
-            icon: const Icon(Icons.summary),
+            icon: Image.asset(
+              summaryUnselected,
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -235,20 +244,24 @@ class CustomBottomNavigationBar extends StatelessWidget {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.money),
+            icon: Image.asset(
+              financialContentsSelected,
+            ),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => FinancialContents()),
+                MaterialPageRoute(builder: (context) => const FinancialContents()),
               );
             },
           ),
           IconButton(
-            icon: const Icon(Icons.person),
+            icon: Image.asset(
+              profileUnselected,
+            ),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfilePage()),
+                MaterialPageRoute(builder: (context) => ProfilePage(fullname: "Name", email: "example@gmail.com", birthdate: "2024-02-17", sex: 'Sex',)),
               );
             },
           ),
