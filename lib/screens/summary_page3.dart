@@ -5,6 +5,8 @@ import 'notification_page.dart';
 import 'package:flutter/services.dart';
 import 'summary_page.dart';
 import 'summary_page2.dart';
+import 'package:slam_up/screens/DashboardScreen/dashboard_page.dart';
+import 'profile_page.dart';
 
 class AllocationEntry {
   final String category;
@@ -177,6 +179,7 @@ class _SummaryPage3State extends State<SummaryPage3> {
             ),
         ],
       ),
+        bottomNavigationBar: const CustomBottomNavigationBar()
     );
   }
 
@@ -653,4 +656,74 @@ void main() {
   runApp(MaterialApp(
     home: SummaryPage3(),
   ));
+}
+
+class CustomBottomNavigationBar extends StatelessWidget {
+  const CustomBottomNavigationBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      decoration: BoxDecoration(
+        color: navBarBg,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 5,
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          IconButton(
+            icon: Image.asset(
+              dashboardUnselected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DashboardPage()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Image.asset(
+              summarySelected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SummaryPage()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Image.asset(
+              financialContentsUnselected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SummaryPage()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Image.asset(
+              profileUnselected,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }
