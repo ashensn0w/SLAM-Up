@@ -77,14 +77,13 @@ class _SummaryPageState extends State<SummaryPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               Text(
                 'Total Expenses: ${totalExpenses.toStringAsFixed(2)}',
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   color: darkText,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 18.0,
                 ),
               ),
               Container(
@@ -103,7 +102,7 @@ class _SummaryPageState extends State<SummaryPage> {
                         chartRadius: MediaQuery
                             .of(context)
                             .size
-                            .width / 2.3,
+                            .width / 2.5,
                         colorList: [
                           Colors.blue,
                           Colors.green,

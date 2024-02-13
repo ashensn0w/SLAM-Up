@@ -84,7 +84,7 @@ class _SummaryPage3State extends State<SummaryPage3> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
           Container(
             width: 270,
             height: 30,
@@ -116,10 +116,10 @@ class _SummaryPage3State extends State<SummaryPage3> {
               });
             },
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 35),
           PieChart(
             dataMap: data,
-            chartRadius: MediaQuery.of(context).size.width / 2.0,
+            chartRadius: MediaQuery.of(context).size.width / 2.5,
             chartType: ChartType.ring,
             ringStrokeWidth: 50,
             centerText: 'Allocated\nBudget',
