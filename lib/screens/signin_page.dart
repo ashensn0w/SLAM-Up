@@ -3,14 +3,14 @@ import 'package:slam_up/screens/signup_page.dart';
 import 'package:slam_up/utils/constants.dart';
 import '../utils/sizes.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SigninPage extends StatefulWidget {
+  const SigninPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SigninPage> createState() => _SigninPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SigninPageState extends State<SigninPage> {
   bool _isPasswordHidden = true;
 
   @override
@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const Text(
-                        'Username',
+                        'Email',
                         style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: fontSizes.fontsizeSm,

@@ -126,6 +126,32 @@ class DashboardPage extends StatelessWidget {
                                   fontSize: 16.0,
                                 ),
                               ),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      // Implement remove functionality here
+                                      // You can use a function to remove the transaction data
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: transactionDeduct,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8.0),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      'Remove',
+                                      style: TextStyle(
+                                        color: lightText,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ],

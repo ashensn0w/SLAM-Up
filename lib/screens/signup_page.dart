@@ -105,7 +105,12 @@ class SignupPage extends StatelessWidget {
 
                   const SizedBox(height: 40),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                        MaterialPageRoute(
+                            builder: (context) => const SigninPage()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
@@ -114,7 +119,7 @@ class SignupPage extends StatelessWidget {
                       minimumSize: const Size(450, 45),
                     ),
                     child: const Text(
-                      "Sign Up",
+                      "Create Account",
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: fontSizes.fontsizeSm,
@@ -130,7 +135,7 @@ class SignupPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          "Already have an account",
+                          "Already have an account?",
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             color: darkText,
@@ -141,7 +146,7 @@ class SignupPage extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(context,
                                 MaterialPageRoute(
-                                    builder: (context) => const LoginScreen())
+                                    builder: (context) => const SigninPage())
                             );
                           },
                           child: const Text(
