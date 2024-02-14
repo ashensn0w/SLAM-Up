@@ -9,7 +9,7 @@ import '../screens/profile_page.dart';
 import 'package:slam_up/utils/constants.dart';
 
 class FinancialContents extends StatefulWidget {
-  const FinancialContents({super.key});
+  const FinancialContents({Key? key}) : super(key: key);
 
   @override
   State<FinancialContents> createState() => _FinancialContentsState();
@@ -20,7 +20,7 @@ class _FinancialContentsState extends State<FinancialContents> {
   final sampleImage1 =
       'https://usalg.org/wp-content/uploads/2021/01/Budgeting-1.jpg';
   final sampleImage2 =
-      'https://www.debt.org/wp-content/uploads/2020/06/shutterstock_1357509185-1.jpg';
+      'https://res.cloudinary.com/moneygeek/image/upload/v1616444464/Budgeting_Statistics_Money_Geek_7cf1dc05ac.png';
   final sampleImage3 =
       'https://www.honeybook.com/blog/wp-content/uploads/2022/02/tracking-expenses-feature.jpg';
   final sampleImage4 =
@@ -98,7 +98,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const NotificationsPage()),
+                        builder: (context) => NotificationsPage()),
                   );
                 },
               ),
@@ -137,6 +137,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                 child: Column(
                   children: [
                     Container(
+                      width: 350,
                       decoration: BoxDecoration(
                         color: contentsBg,
                         borderRadius: BorderRadius.circular(7.0),
@@ -159,8 +160,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                                 uri: Uri.parse(
                                     'https://www.ramseysolutions.com/budgeting/the-truth-about-budgeting'), // Replace with your desired URL
                                 builder: (context, followLink) => TextButton(
-                                  onPressed: followLink,
-                                  child: const Text(
+                                  child: Text(
                                     'Budggeting Tips',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
@@ -170,6 +170,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  onPressed: followLink,
                                 ),
                               ),
                             ),
@@ -179,6 +180,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                     ),
                     const SizedBox(height: 20.0),
                     Container(
+                      width: 350,
                       decoration: BoxDecoration(
                         color: contentsBg,
                         borderRadius: BorderRadius.circular(7.0),
@@ -201,8 +203,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                                 uri: Uri.parse(
                                     'https://www.freshbooks.com/hub/accounting/expense-tracking'), // Replace with your desired URL
                                 builder: (context, followLink) => TextButton(
-                                  onPressed: followLink,
-                                  child: const Text(
+                                  child: Text(
                                     'Expense Tracking',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
@@ -212,6 +213,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  onPressed: followLink,
                                 ),
                               ),
                             ),
@@ -221,6 +223,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                     ),
                     const SizedBox(height: 20.0),
                     Container(
+                      width: 350,
                       decoration: BoxDecoration(
                         color: contentsBg,
                         borderRadius: BorderRadius.circular(7.0),
@@ -243,8 +246,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                                 uri: Uri.parse(
                                     'https://bettermoneyhabits.bankofamerica.com/en/saving-budgeting/ways-to-save-money'), // Replace with your desired URL
                                 builder: (context, followLink) => TextButton(
-                                  onPressed: followLink,
-                                  child: const Text(
+                                  child: Text(
                                     'Ways to Save Money',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
@@ -254,6 +256,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  onPressed: followLink,
                                 ),
                               ),
                             ),
@@ -263,6 +266,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                     ),
                     const SizedBox(height: 20.0),
                     Container(
+                      width: 350,
                       decoration: BoxDecoration(
                         color: contentsBg,
                         borderRadius: BorderRadius.circular(7.0),
@@ -285,8 +289,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                                 uri: Uri.parse(
                                     'https://www.myhubble.money/blog/on-spending-money-wisely'), // Replace with your desired URL
                                 builder: (context, followLink) => TextButton(
-                                  onPressed: followLink,
-                                  child: const Text(
+                                  child: Text(
                                     'Spend Your Money Wisely',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
@@ -296,6 +299,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  onPressed: followLink,
                                 ),
                               ),
                             ),
@@ -412,7 +416,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SummaryPage()),
+                MaterialPageRoute(builder: (context) => SummaryPage()),
               );
             },
           ),
@@ -436,7 +440,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const ProfilePage(
+                    builder: (context) => ProfilePage(
                           fullname: "Name",
                           email: "example@gmail.com",
                           birthdate: "2024-02-17",
@@ -457,11 +461,11 @@ class TabText extends StatelessWidget {
   final bool isSelected;
 
   const TabText({
-    super.key,
+    Key? key,
     required this.text,
     required this.onTap,
     required this.isSelected,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
