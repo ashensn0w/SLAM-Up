@@ -17,8 +17,14 @@ class FinancialContents extends StatefulWidget {
 
 class _FinancialContentsState extends State<FinancialContents> {
   String selectedTab = 'Articles';
-  final sampleImage =
+  final sampleImage1 =
       'https://usalg.org/wp-content/uploads/2021/01/Budgeting-1.jpg';
+  final sampleImage2 =
+      'https://www.debt.org/wp-content/uploads/2020/06/shutterstock_1357509185-1.jpg';
+  final sampleImage3 =
+      'https://www.honeybook.com/blog/wp-content/uploads/2022/02/tracking-expenses-feature.jpg';
+  final sampleImage4 =
+      'https://www.mimeo.com/wp-content/uploads/2022/03/Check-out-how-an-expense-tracking-app-simplifies-reimbursements-1.jpg';
 
   late List<YoutubePlayerController> _controllers;
 
@@ -131,24 +137,6 @@ class _FinancialContentsState extends State<FinancialContents> {
                 child: Column(
                   children: [
                     Container(
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        color: navBarBg,
-                        borderRadius: BorderRadius.circular(7.0),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Container 2',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    Container(
                       decoration: BoxDecoration(
                         color: contentsBg,
                         borderRadius: BorderRadius.circular(7.0),
@@ -159,7 +147,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                           children: [
                             const Padding(padding: EdgeInsets.only(left: 10)),
                             CircleAvatar(
-                              backgroundImage: NetworkImage(sampleImage),
+                              backgroundImage: NetworkImage(sampleImage1),
                               radius: 50,
                             ),
                             const SizedBox(
@@ -172,7 +160,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                                     'https://www.ramseysolutions.com/budgeting/the-truth-about-budgeting'), // Replace with your desired URL
                                 builder: (context, followLink) => TextButton(
                                   child: Text(
-                                    'Esophagus Esophagus habang tayoy kumain',
+                                    'Budggeting Tips',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
@@ -191,58 +179,131 @@ class _FinancialContentsState extends State<FinancialContents> {
                     ),
                     const SizedBox(height: 20.0),
                     Container(
-                      height: 100.0,
                       decoration: BoxDecoration(
-                        color: navBarBg,
+                        color: contentsBg,
                         borderRadius: BorderRadius.circular(7.0),
                       ),
-                      child: const Center(
-                        child: Text(
-                          'Container 2',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Padding(padding: EdgeInsets.only(left: 10)),
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(sampleImage2),
+                              radius: 50,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Link(
+                                target: LinkTarget.blank,
+                                uri: Uri.parse(
+                                    'https://www.freshbooks.com/hub/accounting/expense-tracking'), // Replace with your desired URL
+                                builder: (context, followLink) => TextButton(
+                                  child: Text(
+                                    'Expense Tracking',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: lightText,
+                                      fontSize: fontSizes.fontsizeSm,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  onPressed: followLink,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     const SizedBox(height: 20.0),
                     Container(
-                      height: 100.0,
                       decoration: BoxDecoration(
-                        color: navBarBg,
+                        color: contentsBg,
                         borderRadius: BorderRadius.circular(7.0),
                       ),
-                      child: const Center(
-                        child: Text(
-                          'Container 2',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Padding(padding: EdgeInsets.only(left: 10)),
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(sampleImage3),
+                              radius: 50,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Link(
+                                target: LinkTarget.blank,
+                                uri: Uri.parse(
+                                    'https://bettermoneyhabits.bankofamerica.com/en/saving-budgeting/ways-to-save-money'), // Replace with your desired URL
+                                builder: (context, followLink) => TextButton(
+                                  child: Text(
+                                    'Ways to Save Money',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: lightText,
+                                      fontSize: fontSizes.fontsizeSm,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  onPressed: followLink,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     const SizedBox(height: 20.0),
                     Container(
-                      height: 100.0,
                       decoration: BoxDecoration(
-                        color: navBarBg,
+                        color: contentsBg,
                         borderRadius: BorderRadius.circular(7.0),
                       ),
-                      child: const Center(
-                        child: Text(
-                          'Container 2',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Padding(padding: EdgeInsets.only(left: 10)),
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(sampleImage4),
+                              radius: 50,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Link(
+                                target: LinkTarget.blank,
+                                uri: Uri.parse(
+                                    'https://www.myhubble.money/blog/on-spending-money-wisely'), // Replace with your desired URL
+                                builder: (context, followLink) => TextButton(
+                                  child: Text(
+                                    'Spend Your Money Wisely',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: lightText,
+                                      fontSize: fontSizes.fontsizeSm,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  onPressed: followLink,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
+                    const SizedBox(height: 20.0),
                   ],
                 ),
               ),
