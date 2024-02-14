@@ -137,6 +137,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                 child: Column(
                   children: [
                     Container(
+                      height: 120,
                       width: 350,
                       decoration: BoxDecoration(
                         color: contentsBg,
@@ -180,6 +181,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                     ),
                     const SizedBox(height: 20.0),
                     Container(
+                      height: 120,
                       width: 350,
                       decoration: BoxDecoration(
                         color: contentsBg,
@@ -223,6 +225,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                     ),
                     const SizedBox(height: 20.0),
                     Container(
+                      height: 120,
                       width: 350,
                       decoration: BoxDecoration(
                         color: contentsBg,
@@ -266,6 +269,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                     ),
                     const SizedBox(height: 20.0),
                     Container(
+                      height: 120,
                       width: 350,
                       decoration: BoxDecoration(
                         color: contentsBg,
