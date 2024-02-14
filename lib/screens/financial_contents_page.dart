@@ -78,7 +78,7 @@ class _FinancialContentsState extends State<FinancialContents> {
         children: [
           AppBar(
             title: const Text(
-              'Financial Content',
+              'Financial Contents',
               style: TextStyle(
                 color: Colors.black,
                 fontFamily: 'Poppins',
@@ -114,11 +114,6 @@ class _FinancialContentsState extends State<FinancialContents> {
                 text: 'Articles',
                 onTap: () => handleTabClick('Articles'),
                 isSelected: selectedTab == 'Articles',
-              ),
-              TabText(
-                text: 'Clips',
-                onTap: () => handleTabClick('Clips'),
-                isSelected: selectedTab == 'Clips',
               ),
               TabText(
                 text: 'Videos',
@@ -313,23 +308,6 @@ class _FinancialContentsState extends State<FinancialContents> {
                     ),
                     const SizedBox(height: 20.0),
                   ],
-                ),
-              ),
-            ),
-          ),
-          Visibility(
-            visible: selectedTab == 'Clips',
-            child: Container(
-              height: 100.0,
-              color: Colors.black,
-              child: const Center(
-                child: Text(
-                  'Clips Tab',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
               ),
             ),
