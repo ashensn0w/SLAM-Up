@@ -38,7 +38,8 @@ dependencies:
   syncfusion_flutter_charts: ^24.2.4+3
   youtube_player_flutter: ^8.1.2
   image_picker: ^1.0.7
-  cloud_firestore: ^4.15.4
+  #cloud_firestore: ^4.15.4
+  firebase_core: ^2.25.4
   flutter_linkify: ^6.0.0
   url_launcher: ^6.2.4
 
@@ -52,7 +53,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "916073891085",
-    "project_id": "signin-and-signup-78b87",
-    "storage_bucket": "signin-and-signup-78b87.appspot.com"
+    "project_number": "195633725262",
+    "project_id": "slam-up-db",
+    "storage_bucket": "slam-up-db.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:916073891085:android:4ebb44895e9c3bfa581c44",
+        "mobilesdk_app_id": "1:195633725262:android:55401585051183024a681f",
         "android_client_info": {
           "package_name": "com.example.slam_up"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDHdE9twE8u7VzFy6-PkYGKVehEeU_yRS4"
+          "current_key": "AIzaSyBC1yajlUJ1eMK_r_KxW3zeygZutd422Cs"
         }
       ],
       "services": {
