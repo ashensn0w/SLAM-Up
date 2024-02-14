@@ -9,7 +9,7 @@ import '../screens/profile_page.dart';
 import 'package:slam_up/utils/constants.dart';
 
 class FinancialContents extends StatefulWidget {
-  const FinancialContents({Key? key}) : super(key: key);
+  const FinancialContents({super.key});
 
   @override
   State<FinancialContents> createState() => _FinancialContentsState();
@@ -98,7 +98,7 @@ class _FinancialContentsState extends State<FinancialContents> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => NotificationsPage()),
+                        builder: (context) => const NotificationsPage()),
                   );
                 },
               ),
@@ -159,7 +159,8 @@ class _FinancialContentsState extends State<FinancialContents> {
                                 uri: Uri.parse(
                                     'https://www.ramseysolutions.com/budgeting/the-truth-about-budgeting'), // Replace with your desired URL
                                 builder: (context, followLink) => TextButton(
-                                  child: Text(
+                                  onPressed: followLink,
+                                  child: const Text(
                                     'Budggeting Tips',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
@@ -169,7 +170,6 @@ class _FinancialContentsState extends State<FinancialContents> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  onPressed: followLink,
                                 ),
                               ),
                             ),
@@ -201,7 +201,8 @@ class _FinancialContentsState extends State<FinancialContents> {
                                 uri: Uri.parse(
                                     'https://www.freshbooks.com/hub/accounting/expense-tracking'), // Replace with your desired URL
                                 builder: (context, followLink) => TextButton(
-                                  child: Text(
+                                  onPressed: followLink,
+                                  child: const Text(
                                     'Expense Tracking',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
@@ -211,7 +212,6 @@ class _FinancialContentsState extends State<FinancialContents> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  onPressed: followLink,
                                 ),
                               ),
                             ),
@@ -243,7 +243,8 @@ class _FinancialContentsState extends State<FinancialContents> {
                                 uri: Uri.parse(
                                     'https://bettermoneyhabits.bankofamerica.com/en/saving-budgeting/ways-to-save-money'), // Replace with your desired URL
                                 builder: (context, followLink) => TextButton(
-                                  child: Text(
+                                  onPressed: followLink,
+                                  child: const Text(
                                     'Ways to Save Money',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
@@ -253,7 +254,6 @@ class _FinancialContentsState extends State<FinancialContents> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  onPressed: followLink,
                                 ),
                               ),
                             ),
@@ -285,7 +285,8 @@ class _FinancialContentsState extends State<FinancialContents> {
                                 uri: Uri.parse(
                                     'https://www.myhubble.money/blog/on-spending-money-wisely'), // Replace with your desired URL
                                 builder: (context, followLink) => TextButton(
-                                  child: Text(
+                                  onPressed: followLink,
+                                  child: const Text(
                                     'Spend Your Money Wisely',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
@@ -295,7 +296,6 @@ class _FinancialContentsState extends State<FinancialContents> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  onPressed: followLink,
                                 ),
                               ),
                             ),
@@ -412,7 +412,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SummaryPage()),
+                MaterialPageRoute(builder: (context) => const SummaryPage()),
               );
             },
           ),
@@ -436,7 +436,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ProfilePage(
+                    builder: (context) => const ProfilePage(
                           fullname: "Name",
                           email: "example@gmail.com",
                           birthdate: "2024-02-17",
@@ -457,11 +457,11 @@ class TabText extends StatelessWidget {
   final bool isSelected;
 
   const TabText({
-    Key? key,
+    super.key,
     required this.text,
     required this.onTap,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
