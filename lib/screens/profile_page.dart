@@ -115,7 +115,7 @@ class ProfilePage extends StatelessWidget {
                     fontSize: 24,
                   ),
                 ),
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 10.0),
                 Text(
                   email,
                   style: const TextStyle(
@@ -124,7 +124,7 @@ class ProfilePage extends StatelessWidget {
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 10.0),
                 Text(
                   birthdate,
                   style: const TextStyle(
@@ -133,7 +133,7 @@ class ProfilePage extends StatelessWidget {
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 10.0),
                 Text(
                   sex,
                   style: const TextStyle(
@@ -152,7 +152,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 50,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 130, vertical: 20),
