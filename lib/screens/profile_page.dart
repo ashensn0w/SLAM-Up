@@ -18,7 +18,7 @@ class ProfilePage extends StatelessWidget {
   }) : super(key: key);
 
   //get the image from 'change picture button' in edit profile page
-  final File? image;
+  final File image;
 
   //declared to handle dynamic values from edit profile 'update button'
   String fullname;
@@ -602,6 +602,7 @@ class _EditProfileState extends State<EditProfile> {
                                 email: _emailController.text,
                                 birthdate: _birthdateController.text,
                                 sex: sex,
+                           			image: image, 
                               )),
                     );
                   }
