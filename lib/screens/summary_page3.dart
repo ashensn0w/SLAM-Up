@@ -38,9 +38,10 @@ class _SummaryPage3State extends State<SummaryPage3> {
     Map<String, double> data = getDataForPieChart();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Summary',
           style: TextStyle(
             color: Colors.black,
@@ -69,7 +70,7 @@ class _SummaryPage3State extends State<SummaryPage3> {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -84,20 +85,20 @@ class _SummaryPage3State extends State<SummaryPage3> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
             width: 270,
             height: 30,
             child: ElevatedButton(
               onPressed: () => _showBudgetInputDialog(context),
               style: ElevatedButton.styleFrom(
-                primary: Color.fromRGBO(213, 208, 202, 1.0),
+                primary: const Color.fromRGBO(213, 208, 202, 1.0),
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'Input Budget',
                 style: TextStyle(
                   color: Color.fromRGBO(47, 44, 44, 1.0),
@@ -107,7 +108,7 @@ class _SummaryPage3State extends State<SummaryPage3> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           EditAllocationButton(
             entries: entries,
             onUpdate: (List<AllocationEntry> updatedEntries) {
@@ -116,14 +117,14 @@ class _SummaryPage3State extends State<SummaryPage3> {
               });
             },
           ),
-          SizedBox(height: 35),
+          const SizedBox(height: 35),
           PieChart(
             dataMap: data,
             chartRadius: MediaQuery.of(context).size.width / 2.5,
             chartType: ChartType.ring,
             ringStrokeWidth: 50,
             centerText: 'Allocated\nBudget',
-            legendOptions: LegendOptions(
+            legendOptions: const LegendOptions(
               showLegendsInRow: true,
               legendPosition: LegendPosition.bottom,
               showLegends: true,
@@ -133,7 +134,7 @@ class _SummaryPage3State extends State<SummaryPage3> {
                 fontSize: 16,
               ),
             ),
-            chartValuesOptions: ChartValuesOptions(
+            chartValuesOptions: const ChartValuesOptions(
               showChartValueBackground: true,
               showChartValues: true,
               showChartValuesInPercentage: true,
@@ -149,8 +150,8 @@ class _SummaryPage3State extends State<SummaryPage3> {
           if (calculatedAmounts.isNotEmpty)
             Column(
               children: [
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   'Calculated Amounts:',
                   style: TextStyle(
                     fontFamily: 'Poppins',
@@ -158,7 +159,7 @@ class _SummaryPage3State extends State<SummaryPage3> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 Padding(
                   padding: const EdgeInsets.only(left: 50.0),
                   child: ListView.builder(
@@ -167,7 +168,7 @@ class _SummaryPage3State extends State<SummaryPage3> {
                     itemBuilder: (context, index) {
                       return Text(
                         calculatedAmounts[index],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 16,
                         ),
@@ -185,8 +186,8 @@ class _SummaryPage3State extends State<SummaryPage3> {
 
   Widget _buildButton(BuildContext context, String text, Widget destination,
       bool isActive) {
-    Color backgroundColor = isActive ? Colors.white : Color.fromRGBO(164, 199, 201, 1.0);
-    Color textColor = isActive ? Color.fromRGBO(47, 44, 44, 1.0) : Color.fromRGBO(47, 44, 44, 1.0);
+    Color backgroundColor = isActive ? Colors.white : const Color.fromRGBO(164, 199, 201, 1.0);
+    Color textColor = isActive ? const Color.fromRGBO(47, 44, 44, 1.0) : const Color.fromRGBO(47, 44, 44, 1.0);
 
     return ElevatedButton(
       onPressed: isActive ? null : () {
@@ -205,7 +206,7 @@ class _SummaryPage3State extends State<SummaryPage3> {
         );
       },
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(5.0),
         primary: backgroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -251,7 +252,7 @@ class _SummaryPage3State extends State<SummaryPage3> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Enter Budget Amount'),
+          title: const Text('Enter Budget Amount'),
           content: TextField(
             keyboardType: TextInputType.number,
             onChanged: (value) {
@@ -265,14 +266,14 @@ class _SummaryPage3State extends State<SummaryPage3> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 _calculateAllocatedBudget();
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ],
         );
@@ -311,7 +312,7 @@ class EditAllocationButton extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(15.0),
-        color: Color.fromRGBO(213, 208, 202, 1.0),
+        color: const Color.fromRGBO(213, 208, 202, 1.0),
       ),
       child: ElevatedButton(
         onPressed: () async {
@@ -331,7 +332,7 @@ class EditAllocationButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
-        child: Text(
+        child: const Text(
           'Edit Allocation',
           style: TextStyle(
             color: Color.fromRGBO(47, 44, 44, 1.0),
@@ -364,7 +365,7 @@ class _EditAllocationPageState extends State<EditAllocationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Edit Allocation',
           style: TextStyle(
             color: Colors.black,
@@ -391,27 +392,27 @@ class _EditAllocationPageState extends State<EditAllocationPage> {
                       Expanded(
                         child: TextField(
                           controller: categoryControllers[index],
-                          decoration: InputDecoration(labelText: 'Category'),
+                          decoration: const InputDecoration(labelText: 'Category'),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: TextField(
                           controller: percentageControllers[index],
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
+                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: [DecimalTextInputFormatter()],
-                          decoration: InputDecoration(labelText: 'Percentage'),
+                          decoration: const InputDecoration(labelText: 'Percentage'),
                         ),
                       ),
                     ],
                   );
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               AddCategoryButton(
                 onPressed: shouldEnableAddCategoryButton(),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -434,14 +435,14 @@ class _EditAllocationPageState extends State<EditAllocationPage> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text('Error'),
-                              content: Text('Fields cannot be empty.'),
+                              title: const Text('Error'),
+                              content: const Text('Fields cannot be empty.'),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text('OK'),
+                                  child: const Text('OK'),
                                 ),
                               ],
                             );
@@ -512,13 +513,13 @@ class CancelButton extends StatelessWidget {
           Navigator.pop(context);
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromRGBO(178, 22, 22, 1.0),
+          backgroundColor: const Color.fromRGBO(178, 22, 22, 1.0),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
-        child: Text(
+        child: const Text(
           'Cancel',
           style: TextStyle(
             color: Colors.white,
@@ -557,14 +558,14 @@ class SaveButton extends StatelessWidget {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text('Error'),
-                  content: Text('Fields cannot be empty.'),
+                  title: const Text('Error'),
+                  content: const Text('Fields cannot be empty.'),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text('OK'),
+                      child: const Text('OK'),
                     ),
                   ],
                 );
@@ -573,13 +574,13 @@ class SaveButton extends StatelessWidget {
           }
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromRGBO(0, 139, 22, 1.0),
+          backgroundColor: const Color.fromRGBO(0, 139, 22, 1.0),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
-        child: Text(
+        child: const Text(
           'Save',
           style: TextStyle(
             color: Colors.white,
@@ -620,13 +621,13 @@ class AddCategoryButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color.fromRGBO(164, 199, 201, 1.0),
+            backgroundColor: const Color.fromRGBO(164, 199, 201, 1.0),
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
           ),
-          child: Text(
+          child: const Text(
             '+  Add Category',
             style: TextStyle(
               color: Color.fromRGBO(47, 44, 44, 1.0),
